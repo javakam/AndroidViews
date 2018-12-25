@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--文字颜色-->
+    <color name="font_black_05">#999999</color>
+    <color name="font_black_04">#888888</color>
+    <color name="font_black_03">#666666</color>
+    <color name="font_black_02">#555555</color>
+    <color name="font_black_01">#444444</color>
+    <color name="font_alpha">#80FFFFFF</color>
+    <color name="font_black">#333333</color>
+    <color name="font_white">#FFFFFF</color>
+    <color name="font_blue">#28A9BC</color>
+    <color name="font_gray">#555555</color>
+    <color name="font_orange">#EF630E</color>
+    <color name="font_red">#FF0000</color>
+    <color name="font_btn_normal">@color/color_white</color>
+    <color name="font_btn_press">#61B2F6</color>
+
+    <!--控件颜色-->
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_gray">#E6E6E6</color>
+    <color name="color_gray_light">#F6F6F6</color>
+    <color name="color_red_light">#E01616</color>
+    <color name="color_blue">#0273FE</color>
+    <color name="color_blue_light">#28A9BC</color>
+
+    <!--通用-->
+    <color name="color_com_bg">#F0F0F0</color>
+    <color name="color_btn_start">#4481eb</color>
+    <color name="color_btn_end">#04befe</color>
+    <color name="color_common_dialog_title">#1D1D1D</color>
+
+    <!--分割线-->
+    <color name="line_color">#888888</color>
+    <color name="line_color_user">#E4E4E4</color>
+    <color name="line_color_health_plan">#d6d6d6</color>
+    <color name="line_color_select_header">@color/color_com_bg</color>
+    <color name="line_color_message_center">#dddddd</color>
+
+    <!--用户首页-->
+    <color name="color_user_main_explain_line">#b2b2b2</color>
+    <color name="color_user_main_sleep_line">#8588ff</color>
+    <color name="color_user_main_tcm_main">#edab1d</color>
+    <color name="color_user_main_tcm_minorly">#1786f8</color>
+    <color name="color_user_main_tcm_tendency">#8368f4</color>
+    <color name="color_user_main_buttom_line">#b3b3b3</color>
+
+    <!--健康管理-->
+    <color name="color_manage_monitor_line_date">#d1d1d1</color>
+    <color name="color_manage_monitor_line_desire">#999999</color>
+    <color name="color_manage_monitor_line">#f0f0f0</color>
+    <color name="color_manage_monitor_line_maximum">#dadbdb</color>
+    <color name="color_manage_monitor_line_count">#e1e1e1</color>
+    <color name="color_manage_monitor_background">#87000000</color>
+    <color name="color_manage_assess_line_background">#D6D6D6</color>
+
+    <!--健康计划-日期选取-->
+    <color name="color_health_plan_date_text">#777777</color>
+    <color name="color_health_plan_date_old">#dcdcdc</color>
+    <color name="color_health_plan_date_old_selected">#E11E1E</color>
+    <color name="color_health_plan_date_today">@color/color_blue_light</color>
+    <color name="color_health_plan_date_future">@color/color_white</color>
+    <!--健康计划-进度环-->
+    <color name="color_health_plan_progress_bg">#eeeeee</color>
+    <color name="color_health_plan_progress_text_above">#959595</color>
+    <color name="color_health_plan_progress_text_below">#5F5F5F</color>
+    <!--健康计划-任务标签-->
+    <color name="color_health_plan_task_label">#A16745</color>
+    <color name="color_health_plan_task_line">#f1f1f1</color>
+    <color name="color_health_plan_task_label_clock">#cccccc</color>
+    <color name="color_health_plan_task_label_clock_no">#f38d4f</color>
+
+
+    <!--AddressPickerDialog Pad-->
+    <color name="color_address_pad_cancel">#76829e</color>
+    <color name="color_address_pad_confirm">#009eff</color>
+    <!--Pad Light-->
+    <color name="color_address_pad_bg">#FFFFFF</color>
+    <color name="color_address_pad_tab">#5a6589</color>
+    <color name="color_address_pad_tab_picked">#009eff</color>
+    <color name="color_address_pad_line">#5a6589</color>
+    <color name="color_address_pad_hint">#b5baca</color>
+    <color name="color_address_pad_item_letter">#b5baca</color>
+    <color name="color_address_pad_item_area">#5a6589</color>
+    <color name="color_address_pad_item_picked">#ebf0f8</color>
+    <!--Pad Dark-->
+    <color name="color_address_pad_bg_dark">#424e72</color>
+    <color name="color_address_pad_tab_dark">#FFFFFF</color>
+    <color name="color_address_pad_tab_dark_fixed">#76829e</color>
+    <color name="color_address_pad_tab_dark_picked">#FFFFFF</color>
+    <color name="color_address_pad_line_dark">#485477</color>
+    <color name="color_address_pad_hint_dark">#576384</color>
+    <color name="color_address_pad_item_letter_dark">#576384</color>
+    <color name="color_address_pad_item_area_dark">#76829e</color>
+    <color name="color_address_pad_item_picked_dark">#3e496b</color>
+    <!--Phone Light-->
+    <color name="color_address_phone_cancel">#333333</color>
+    <color name="color_address_phone_confirm">#ef630e</color>
+    <color name="color_address_phone_title">#000000</color>
+    <color name="color_address_phone_bg">#F9F9F9</color>
+    <color name="color_address_phone_tab">#333333</color>
+    <color name="color_address_phone_tab_fixed">#999999</color>
+    <color name="color_address_phone_tab_picked">#ef630e</color>
+    <color name="color_address_phone_line">#dedede</color>
+    <color name="color_address_phone_hint">#999999</color>
+    <color name="color_address_phone_item_letter">#999999</color>
+    <color name="color_address_phone_item_area">#000000</color>
+    <color name="color_address_phone_item_picked">#FF9AFF</color>
+
+
+    <!--健康评估-->
+    <color name="color_evaluate_bg">#f3f3f3</color>
+    <color name="color_evaluate_tab_text">#3b3b3b</color>
+    <color name="color_evaluate_text_black">#444444</color>
+    <color name="color_evaluate_bottom">#0273fe</color>
+    <color name="color_evaluate_base_info_gray">#f2f8ff</color>
+    <!--标尺颜色-->
+    <color name="color_second">#1786f8</color>
+    <color name="font_pale">#999999</color>
+    <color name="main_top_text_background">#1cc4e1</color>
+    <color name="black_font_other">#858585</color>
+</resources>

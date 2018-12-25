@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_address"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_72"
+        android:layout_marginLeft="@dimen/size_18"
+        android:layout_marginRight="@dimen/size_18"
+        app:tabBackground="@null"
+        app:tabGravity="center"
+        app:tabIndicatorAnimationDuration="300"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorGravity="bottom"
+        app:tabIndicatorHeight="@dimen/size_3"
+        app:tabMode="scrollable"
+        app:tabTextAppearance="@style/AddressPickerTabLayoutTextAppearance"
+        tools:tabIndicatorColor="@color/color_address_confirm"
+        tools:tabSelectedTextColor="@color/color_address_confirm"
+        tools:tabTextColor="@color/color_address_text" />
+
+    <View
+        android:id="@+id/view_address_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_2"
+        tools:background="@color/color_address_pad_line" />
+
+    <TextView
+        android:id="@+id/tv_address_hint"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_38"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/size_120"
+        android:text="选择省份/地区"
+        android:textSize="@dimen/font_20"
+        tools:background="@color/color_address_pad_bg"
+        tools:textColor="@color/color_address_pad_hint" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_address"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

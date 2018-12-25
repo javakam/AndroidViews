@@ -1,0 +1,95 @@
+<resources>
+
+    <!-- Base application configHelper. -->
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light" >
+    </style>
+
+    <style name="CustomDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+
+    <style name="BottomDialogStyle" parent="CustomDialogStyle">
+        <item name="android:windowBackground">@color/color_white</item>
+    </style>
+
+    <style name="AddressPickerTabLayoutTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/font_26</item>
+        <item name="android:singleLine">true</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <!--Phone Dialog Light-->
+    <style name="AddressPickerDialogPhoneStyle" parent="CustomDialogStyle">
+        <item name="android:windowBackground">@drawable/address_picker_dialog_phone</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    <!--Pad Dialog Light-->
+    <style name="AddressPickerDialogPadLightStyle" parent="CustomDialogStyle">
+        <item name="android:windowBackground">@drawable/address_picker_dialog_pad_light</item>
+    </style>
+    <!--Pad Dialog Dark-->
+    <style name="AddressPickerDialogPadDarkStyle" parent="CustomDialogStyle">
+        <item name="android:windowBackground">@drawable/address_picker_dialog_pad_dark</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!--Common Style-->
+    <style name="AddressPickerBaseStyle" parent="AppTheme">
+        <item name="picker_tabTextSize">@dimen/font_26</item>
+        <item name="picker_tabIndicatorWidth">@dimen/size_74</item>
+        <item name="picker_tabIndicatorHeight">@dimen/size_3</item>
+        <item name="picker_tabMode">scrollable</item>
+    </style>
+    <!--Default Style-->
+    <!--Phone Dialog AddressPicker Light style-->
+    <style name="AddressPickerPhoneLightStyle" parent="AddressPickerBaseStyle">
+        <item name="picker_mode">phone</item>
+        <item name="picker_background">@color/color_address_phone_bg</item>
+        <item name="picker_tabTextColor">@color/color_address_phone_tab</item>
+        <item name="picker_tabSelectedTextColor">@color/color_address_phone_tab_picked</item>
+        <item name="picker_tabIndicatorColor">@color/color_address_phone_tab_picked</item>
+        <item name="picker_lineColor">@color/color_address_phone_line</item>
+        <item name="picker_hintTextColor">@color/color_address_phone_hint</item>
+        <item name="picker_itemBackground">@color/color_address_phone_bg</item>
+        <item name="picker_itemPickedBackground">@color/color_address_phone_item_picked</item>
+        <item name="picker_itemLetterTextColor">@color/color_address_phone_item_letter</item>
+        <item name="picker_itemAreaTextColor">@color/color_address_phone_item_area</item>
+        <item name="picker_itemArrowDrawable">@drawable/icon_address_ok_dark</item>
+    </style>
+    <!--Pad Dialog AddressPicker Light style-->
+    <style name="AddressPickerPadLightStyle" parent="AddressPickerBaseStyle">
+        <item name="picker_mode">pad</item>
+        <item name="picker_background">@color/color_address_pad_bg</item>
+        <item name="picker_tabTextColor">@color/color_address_pad_tab</item>
+        <item name="picker_tabSelectedTextColor">@color/color_address_pad_tab_picked</item>
+        <item name="picker_tabIndicatorColor">@color/color_address_pad_tab_picked</item>
+        <item name="picker_lineColor">@color/color_address_pad_line</item>
+        <item name="picker_hintTextColor">@color/color_address_pad_hint</item>
+        <item name="picker_itemBackground">@color/color_address_pad_bg</item>
+        <item name="picker_itemPickedBackground">@color/color_address_pad_item_picked</item>
+        <item name="picker_itemLetterTextColor">@color/color_address_pad_item_letter</item>
+        <item name="picker_itemAreaTextColor">@color/color_address_pad_item_area</item>
+        <item name="picker_itemArrowDrawable">@drawable/icon_address_ok_dark</item>
+    </style>
+    <!--Pad Dialog AddressPicker Dark style-->
+    <style name="AddressPickerPadDarkStyle" parent="AddressPickerBaseStyle">
+        <item name="picker_mode">pad</item>
+        <item name="picker_background">@color/color_address_pad_bg_dark</item>
+        <item name="picker_tabTextColor">@color/color_address_pad_tab_dark</item>
+        <item name="picker_tabSelectedTextColor">@color/color_address_pad_tab_dark_picked</item>
+        <item name="picker_tabIndicatorColor">@color/color_address_pad_tab_dark_picked</item>
+        <item name="picker_lineColor">@color/color_address_pad_line_dark</item>
+        <item name="picker_hintTextColor">@color/color_address_pad_hint_dark</item>
+        <item name="picker_itemBackground">@color/color_address_pad_bg_dark</item>
+        <item name="picker_itemPickedBackground">@color/color_address_pad_item_picked_dark</item>
+        <item name="picker_itemLetterTextColor">@color/color_address_pad_item_letter_dark</item>
+        <item name="picker_itemAreaTextColor">@color/color_address_pad_item_area_dark</item>
+        <item name="picker_itemArrowDrawable">@drawable/icon_address_ok_light</item>
+    </style>
+
+</resources>

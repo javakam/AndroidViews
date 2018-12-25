@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_item_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rectangle_main_menu"
+    android:minHeight="@dimen/size_60">
+
+    <TextView
+        android:id="@+id/tv_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="3"
+        android:padding="@dimen/size_16"
+        android:textColor="@color/font_black"
+        android:textSize="@dimen/font_34"
+        android:textStyle="bold"
+        tools:text="测试文本" />
+</FrameLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+自定义复选框颜色及左右，
+    右侧多选框：
+    android:checkMarkTint="@android:color/holo_green_dark"
+    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+    左侧多选框：
+    android:drawableTint="@android:color/holo_blue_bright"
+    android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+-->
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/checkedTextViewSpinner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+    android:drawableTint="#8f9cb4"
+    android:gravity="center_vertical"
+    android:textColor="#30395c"
+    android:drawablePadding="@dimen/size_10"
+    android:textSize="@dimen/font_26"
+    tools:text="请选择" />

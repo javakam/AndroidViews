@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_address_item_phone"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_84"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/size_28"
+    android:paddingRight="@dimen/size_76">
+
+    <TextView
+        android:id="@+id/tv_address_letter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_26"
+        tools:text="A"
+        tools:textColor="@color/color_address_phone_item_letter" />
+
+    <TextView
+        android:id="@+id/tv_address_area"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_46"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:textSize="@dimen/font_26"
+        tools:text="安徽省"
+        tools:textColor="@color/color_address_phone_item_area" />
+
+    <ImageView
+        android:id="@+id/iv_address_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_address_ok_orange"
+        android:visibility="invisible" />
+</LinearLayout>

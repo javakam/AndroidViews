@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="@dimen/size_80"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.work.progressbar.PlanProgressBar
+        android:id="@+id/circleProgressBar"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:textColor="@color/color_health_plan_progress_text_below"
+        android:textSize="20sp"
+        app:plan_background_color="@color/color_health_plan_progress_bg"
+        app:plan_stroke_width="15dp"
+        app:plan_stroke_width_inner="1dp"
+        app:plan_type="type_circle" />
+</LinearLayout>

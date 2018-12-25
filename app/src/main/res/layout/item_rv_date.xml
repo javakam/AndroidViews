@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/size_104"
+    android:layout_height="@dimen/size_116"
+    android:layout_gravity="center"
+    android:descendantFocusability="afterDescendants"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/size_22"
+    android:paddingTop="@dimen/size_28"
+    android:paddingRight="@dimen/size_22">
+
+    <TextView
+        android:id="@+id/tv_item_health_plan_date"
+        android:layout_width="@dimen/size_60"
+        android:layout_height="@dimen/size_60"
+        android:layout_gravity="center"
+        android:background="@drawable/health_plan_date_selector"
+        android:gravity="center"
+        android:textColor="@color/color_health_plan_date_text"
+        android:textSize="@dimen/font_30"
+        android:textStyle="bold"
+        tools:text="今" />
+
+    <View
+        android:id="@+id/view_health_plan_point"
+        android:layout_width="@dimen/size_10"
+        android:layout_height="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_9"
+        android:layout_marginBottom="@dimen/size_9"
+        android:background="@drawable/health_plan_date_point"
+        android:visibility="invisible" />
+</LinearLayout>

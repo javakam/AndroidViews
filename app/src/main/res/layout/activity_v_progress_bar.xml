@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.work.progressbar.PlanProgressBar
+        android:id="@+id/rectProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:plan_background_color="@color/color_health_plan_progress_bg"
+        app:plan_progress_color="@android:color/holo_blue_light"
+        app:plan_type="type_rect" />
+
+    <com.work.progressbar.PlanProgressBar
+        android:id="@+id/circleProgressBar"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/color_health_plan_progress_text_below"
+        android:textSize="20sp"
+        app:plan_background_color="@color/color_health_plan_progress_bg"
+        app:plan_stroke_width="15dp"
+        app:plan_stroke_width_inner="1dp"
+        app:plan_type="type_circle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="开始进度" />
+
+        <Button
+            android:id="@+id/btn_rollback"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="回滚进度" />
+    </LinearLayout>
+</LinearLayout>

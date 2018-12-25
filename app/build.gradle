@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+
+//文件输出根目录
+def rootDir = '"ViewGeneral"'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.view"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        multiDexEnabled true    //突破65535限制
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "{$versionCode}"
+    }
+
+    productFlavors {//多渠道打包
+        views {
+
+        }
+
+        productFlavors.all {
+            flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            buildConfigField('String', 'IP_ADDRESS', '"http://"')
+            buildConfigField('String', 'PHOTO_ADDRESS', '"http://"')
+            buildConfigField('boolean', 'LOG_DEBUG', 'true')
+            buildConfigField('String', 'ROOT_DIR', "${rootDir}")
+            buildConfigField('String', 'ROOT_PATH', '"GeneralDebug"')
+            buildConfigField('boolean', 'BUGLY', 'false')
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+        }
+
+        release {
+            buildConfigField('String', 'IP_ADDRESS', '""')
+            buildConfigField('String', 'PHOTO_ADDRESS', '""')
+            buildConfigField('boolean', 'LOG_DEBUG', 'false')
+            buildConfigField('String', 'ROOT_DIR', "${rootDir}")
+            buildConfigField('String', 'ROOT_PATH', '"GeneralRelease"')
+            buildConfigField('boolean', 'BUGLY', 'true')
+            minifyEnabled false  //混淆
+            zipAlignEnabled true //Zipalign优化
+            shrinkResources false // 移除无用的resource文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release//在此调用签名方法
+        }
+    }
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.design
+    implementation rootProject.ext.appcompatv7
+    implementation rootProject.ext.recyclerviewv7
+    implementation rootProject.ext.constraint
+    implementation rootProject.ext.ormliteandroid
+    implementation rootProject.ext.ormlitecore
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+}

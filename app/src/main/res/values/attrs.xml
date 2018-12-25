@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PlanProgressBar">
+        <attr name="plan_type" format="enum">
+            <enum name="type_rect" value="0" />
+            <enum name="type_circle" value="1" />
+        </attr>
+        <!--<attr name="plan_progress_gradient" format="reference" />-->
+        <attr name="plan_progress_color" format="color" />
+        <attr name="plan_background_color" format="color" />
+        <attr name="plan_max_value" format="integer" />
+        <attr name="plan_value" format="integer" />
+        <attr name="plan_stroke_inner_circle_distance" format="dimension" />
+        <attr name="plan_stroke_width_inner" format="dimension" />
+        <attr name="plan_stroke_width" format="dimension" />
+        <attr name="plan_stroke_round_cap" format="boolean" />
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundView">
+        <attr name="ring_width" format="dimension" />
+        <attr name="ring_color" format="color" />
+        <attr name="progress_ring_width" format="dimension" />
+        <attr name="progress_ring_start_color" format="color" />
+        <attr name="progress_ring_end_color" format="color" />
+        <attr name="android_radius" format="dimension" />
+        <attr name="text_color" format="color" />
+        <attr name="text_size" format="dimension" />
+    </declare-styleable>
+
+    <!--地址选择器默认样式Phone-->
+    <attr name="addressPickerStyle" format="reference" />
+    <!--地址选择器-->
+    <declare-styleable name="AddressPicker">
+        <!--平台选择：手机、平板-->
+        <attr name="picker_mode" format="enum">
+            <enum name="phone" value="0" />
+            <enum name="pad" value="1" />
+        </attr>
+        <!--背景色-->
+        <attr name="picker_background" format="color|reference" />
+        <!--Tab文字大小-->
+        <attr name="picker_tabTextSize" format="dimension" />
+        <!--Tab文字颜色-->
+        <attr name="picker_tabTextColor" format="color|reference" />
+        <!--Tab选中状态的文字颜色-->
+        <attr name="picker_tabSelectedTextColor" format="color|reference" />
+        <!--Tab Indicator宽度-->
+        <attr name="picker_tabIndicatorWidth" format="dimension" />
+        <!--Tab Indicator高度-->
+        <attr name="picker_tabIndicatorHeight" format="dimension" />
+        <!--Tab Indicator颜色-->
+        <attr name="picker_tabIndicatorColor" format="color|reference" />
+        <!--Tab 固定 or 滑动-->
+        <attr name="picker_tabMode" format="enum">
+            <enum name="scrollable" value="0" />
+            <enum name="fixed" value="1" />
+        </attr>
+        <!--分割线-->
+        <attr name="picker_lineColor" format="color|reference" />
+        <!--提示文本-->
+        <attr name="picker_hintTextColor" format="color|reference" />
+        <!--列表条目背景色-->
+        <attr name="picker_itemBackground" format="color|reference" />
+        <!--列表条目选中时背景色-->
+        <attr name="picker_itemPickedBackground" format="color|reference" />
+        <!--列表字母文字颜色-->
+        <attr name="picker_itemLetterTextColor" format="color|reference" />
+        <!--列表地址文字颜色-->
+        <attr name="picker_itemAreaTextColor" format="color|reference" />
+        <!--列表条目选中时显示的箭头-->
+        <attr name="picker_itemArrowDrawable" format="reference" />
+    </declare-styleable>
+</resources>
