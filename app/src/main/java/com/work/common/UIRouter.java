@@ -3,6 +3,8 @@ package com.work.common;
 import com.work.R;
 import com.work.addresspicker.AddressPickerActivity;
 import com.work.basic.BasicViewActivity;
+import com.work.basic.BasicViewCenterActivity;
+import com.work.floatbutton.FloatButtonActivity;
 import com.work.progressbar.ProgressBarActivity;
 import com.work.progressbar.ProgressBarActivity2;
 import com.work.progressbar.ProgressBarActivity3;
@@ -28,8 +30,11 @@ public enum UIRouter {
     DATE_SELECT(3, "日期选择", R.drawable.ic_launcher_background, HorizonRecycleViewActivity.class),
     ADDRESS_SELECT(4, "地址选择", R.drawable.ic_launcher_background, AddressPickerActivity.class),
     SHADOW_LINE(5, "阴影效果", R.drawable.ic_launcher_background, ShadowLineActivity.class),
-    BASIC_VIEW(6, "Paint&Canvas", R.drawable.ic_launcher_background, BasicViewActivity.class),
-    SPINNER(7, "下拉框", R.drawable.ic_launcher_background, SpinnerActivity.class);
+    BASIC_VIEW(6, "绘制基础1-3", R.drawable.ic_launcher_background, BasicViewActivity.class),
+    BASIC_VIEW_CENTER(7, "绘制基础4", R.drawable.ic_launcher_background, BasicViewCenterActivity.class),
+    //    STRING_BUILDER(8, "多层SpannableStringBuilder", R.drawable.ic_launcher_background, StringBuilderActivity.class),
+    SPINNER(8, "下拉框", R.drawable.ic_launcher_background, SpinnerActivity.class),
+    FLOAT_BUTTON(9, "全局悬浮窗", R.drawable.ic_launcher_background, FloatButtonActivity.class);
 
     public static Class<?> findClassById(int id) {
         for (UIRouter r : UIRouter.values()) {

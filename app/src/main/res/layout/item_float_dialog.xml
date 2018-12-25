@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="0.8"
+    android:background="#000000"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/size_50">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请选择"
+        android:textColor="@color/font_white"
+        android:textSize="@dimen/font_28" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_60"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/iv_float_voice"
+                android:layout_width="@dimen/size_200"
+                android:layout_height="@dimen/size_200"
+                android:layout_gravity="center"
+                android:padding="@dimen/size_30"
+                android:src="@drawable/icon_float_voice" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/iv_float_home"
+                android:layout_width="@dimen/size_200"
+                android:layout_height="@dimen/size_200"
+                android:layout_gravity="center"
+                android:padding="@dimen/size_30"
+                android:src="@drawable/icon_float_home" />
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

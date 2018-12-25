@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -141,5 +143,27 @@ public class UIUtils {
      */
     public static int getScreenWidth(Context context) {
         return getDisplayMetrics(context).widthPixels;
+    }
+
+    /**
+     * 获取屏幕的高
+     */
+    public static int getScreenHeight(Context context) {
+        return context.getResources().getDisplayMetrics().heightPixels;
+    }
+
+    public static int getStatusBarHeight(Context c) {
+        int result = 0;
+        int resourceId = c.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = c.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+    public static View inflate(Context applicationContext, int layoutId) {
+        LayoutInflater inflate = (LayoutInflater) applicationContext.
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return inflate.inflate(layoutId, null);
     }
 }

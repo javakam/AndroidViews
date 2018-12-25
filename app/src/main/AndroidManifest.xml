@@ -2,17 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.work">
+    <!--悬浮窗效果-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <!-- 摄像头权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-    <!--Bugly权限-->
+    <!-- Bugly权限 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission
         android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -58,14 +59,21 @@
             android:name=".addresspicker.AddressPickerActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize|layoutDirection|screenLayout"
             android:screenOrientation="landscape" />
-
         <activity android:name=".shadowline.ShadowLineActivity" />
         <activity android:name=".basic.BasicViewActivity" />
+        <activity android:name=".basic.BasicViewCenterActivity" />
         <activity android:name=".spinner.SpinnerActivity" />
-
+        <activity android:name=".floatbutton.FloatButtonActivity"></activity>
+        <activity
+            android:name="com.work.floatwindow.FloatActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard"
+            android:theme="@style/permission_PermissionActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <meta-data
             android:name="CHANNEL"
             android:value="${CHANNEL_VALUE}" />
+
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@
         <com.work.basic.CanvasBasic
             android:id="@+id/lineView"
             android:layout_width="300dp"
-            android:layout_height="230dp" />
+            android:layout_height="150dp" />
 
         <View
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
 
         <com.work.basic.PaintShaderBasic
             android:layout_width="400dp"
-            android:layout_height="230dp" />
+            android:layout_height="210dp" />
 
         <View
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
 
         <com.work.basic.PaintXfermode
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="200dp" />
 
         <View
             android:layout_width="match_parent"
@@ -69,7 +69,7 @@
 
         <com.work.basic.PaintStyleBasic
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="200dp" />
 
         <View
             android:layout_width="match_parent"
@@ -80,7 +80,7 @@
 
         <com.work.basic.PaintPathEffect
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="260dp" />
 
         <View
             android:layout_width="match_parent"
@@ -137,7 +137,7 @@
 
         <com.work.basic.DrawTextPaintSetting
             android:layout_width="match_parent"
-            android:layout_height="900dp" />
+            android:layout_height="650dp" />
 
         <View
             android:layout_width="match_parent"
@@ -145,6 +145,10 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@color/line_color" />
+
+        <com.work.basic.DrawTextPaintMeasure
+            android:layout_width="match_parent"
+            android:layout_height="480dp" />
 
         <View
             android:layout_width="match_parent"

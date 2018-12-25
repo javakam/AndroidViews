@@ -148,9 +148,36 @@ public class DrawTextPaintSetting extends View {
         //todo 2018年12月21日 18:01:04 setTextLocale 无效
 
         //11 setHinting(int mode) 设置是否启用字体的 hinting （字体微调）。
+        /*
+         hinting 技术就是为了解决这种问题的：
+         通过向字体中加入 hinting 信息，让矢量字体在尺寸过小的时候得到针对性的修正，从而提高显示效果。
+
+         功能很强，效果很赞。不过在现在（ 2018 年），手机屏幕的像素密度已经非常高，
+         几乎不会再出现字体尺寸小到需要靠 hinting 来修正的情况，所以这个方法其实……没啥用了。可以忽略。
+         */
         //https://ws3.sinaimg.cn/large/52eb2279ly1fig65wwv1yj20ki0bywje.jpg
 
 
+        //12 setElegantTextHeight(boolean elegant)
+        //声明：这个方法对中国人没用，不想看的话可以直接跳过，无毒副作用。
+        //设置是否开启文字的 elegant height 。开启之后，文字的高度就变优雅了（误）。
+
+        //13 setSubpixelText(boolean subpixelText) 是否开启次像素级的抗锯齿（ sub-pixel anti-aliasing ）。
+        /*
+        次像素级抗锯齿这个功能解释起来很麻烦，简单说就是根据程序所运行的设备的屏幕类型，
+        来进行针对性的次像素级的抗锯齿计算，从而达到更好的抗锯齿效果。
+        更详细的解释可以看这篇文章。 http://alienryderflex.com/sub_pixel/
+
+        不过，和前面讲的字体 hinting 一样，由于现在手机屏幕像素密度已经很高，
+        所以默认抗锯齿效果就已经足够好了，一般没必要开启次像素级抗锯齿，所以这个方法基本上没有必要使用。
+         */
+
+        //14 setLinearText(boolean linearText)
+
+
+        /*
+        以上就是 Paint 的对文字的显示效果设置类方法。下面介绍它的第二类方法：测量文字尺寸类。
+         */
     }
 
     private Paint getPaint() {
