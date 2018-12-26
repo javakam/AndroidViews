@@ -19,6 +19,7 @@ import com.work.floatwindow.ViewStateListener;
 import com.work.utils.ActivityTaskManager;
 import com.work.utils.AppUtils;
 import com.work.utils.DaoUtils;
+import com.work.utils.UIUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,8 @@ public class VApplication extends Application {
                 .setHeight(Screen.WIDTH, 0.15f)
                 .setX(Screen.WIDTH, 0.82f)//设置悬浮控件屏幕偏移
                 .setY(Screen.HEIGHT, 0.5f)
-                .setMoveType(MoveType.SLIDE, 20, 20,20,20)
+                .setSideScope(UIUtils.getDimens(getApplicationContext(), R.dimen.size_60))//设置悬浮控件上下贴边判定范围
+                .setMoveType(MoveType.SLIDE, 20, 20, 20, 20)
                 //DecelerateInterpolator BounceInterpolator  AccelerateDecelerateInterpolator
                 .setMoveStyle(300, new DecelerateInterpolator())
                 .setFilter(true, MainActivity.class, FloatButtonActivity.class)
@@ -75,7 +77,6 @@ public class VApplication extends Application {
                 .setDesktopShow(false) // 设置Home键回到桌面时，是否仍然显示悬浮控件
                 .build();
     }
-
 
     private PermissionListener mPermissionListener = new PermissionListener() {
         @Override

@@ -23,7 +23,6 @@ public class FloatLifecycle extends BroadcastReceiver implements Application.Act
     private static final String SYSTEM_DIALOG_REASON_HOME_KEY = "homekey";
     private static final long DELAY = 300;
     private Handler mHandler;
-    private Class currentActivity;
     private Class[] activities;
     private boolean showFlag;
     private int startCount;
@@ -63,7 +62,6 @@ public class FloatLifecycle extends BroadcastReceiver implements Application.Act
 
     @Override
     public void onActivityResumed(Activity activity) {
-        currentActivity=activity.getClass();
         if (sResumedListener != null) {
             num--;
             if (num == 0) {
