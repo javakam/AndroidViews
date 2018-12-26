@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--常用Alpha值16进制黑白带命名-->
+    <!--http://www.jcodecraeer.com/plus/view.php?aid=9653-->
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
@@ -27,6 +30,9 @@
     <color name="color_red_light">#E01616</color>
     <color name="color_blue">#0273FE</color>
     <color name="color_blue_light">#28A9BC</color>
+
+    <color name="alpha_black_50">#80000000</color>
+    <color name="alpha_black_80">#CC000000</color>
 
     <!--通用-->
     <color name="color_com_bg">#F0F0F0</color>
@@ -112,15 +118,8 @@
     <color name="color_address_phone_item_picked">#FF9AFF</color>
 
 
-    <!--健康评估-->
-    <color name="color_evaluate_bg">#f3f3f3</color>
-    <color name="color_evaluate_tab_text">#3b3b3b</color>
-    <color name="color_evaluate_text_black">#444444</color>
-    <color name="color_evaluate_bottom">#0273fe</color>
-    <color name="color_evaluate_base_info_gray">#f2f8ff</color>
-    <!--标尺颜色-->
-    <color name="color_second">#1786f8</color>
-    <color name="font_pale">#999999</color>
-    <color name="main_top_text_background">#1cc4e1</color>
-    <color name="black_font_other">#858585</color>
+    <!--悬浮控件-->
+    <color name="fab_background_color">#00000000</color>
+    <color name="dialog_background_color">#fafafa</color>
+    <color name="dialog_background_scrim">#CC000000</color>
 </resources>

@@ -70,6 +70,15 @@
             android:launchMode="standard"
             android:theme="@style/permission_PermissionActivity"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".floatwindow.DialogActivity"
+            android:parentActivityName=".floatbutton.FloatButtonActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".floatbutton.FloatButtonActivity" />
+        </activity>
+
         <meta-data
             android:name="CHANNEL"
             android:value="${CHANNEL_VALUE}" />

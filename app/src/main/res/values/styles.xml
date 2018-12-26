@@ -17,6 +17,13 @@
         </item>
     </style>
 
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/dialog_background_scrim</item>
+        <!--<item name="android:windowAnimationStyle">@null</item>-->
+        <!--<item name="android:windowContentTransitions">true</item>-->
+    </style>
+
     <style name="BottomDialogStyle" parent="CustomDialogStyle">
         <item name="android:windowBackground">@color/color_white</item>
     </style>

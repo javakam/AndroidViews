@@ -30,18 +30,28 @@ import com.work.utils.UIUtils;
  * Date 2018/10/22  13:34
  */
 public abstract class BaseActivity extends FragmentActivity {
+
     /**
      * 悬浮窗
      */
     private FloatButton mFloatButton = FloatButton.getInstance();
+
+    protected FloatWindow floatWindow;
 
     @Override
     protected void onResume() {
         super.onResume();
         mFloatButton.show(this);
 
-        //
-        final FloatWindow floatWindow = VApplication.mFloatWindow;
+        //过渡动画 {}
+        floatWindow = VApplication.mFloatWindow;
+
+
+        //traditional dialog
+//        showTraditionalDialog();
+    }
+
+    private void showTraditionalDialog() {
         floatWindow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

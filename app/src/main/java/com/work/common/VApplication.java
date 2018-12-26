@@ -69,7 +69,7 @@ public class VApplication extends Application {
                 .setY(Screen.HEIGHT, 0.5f)
                 .setSideScope(UIUtils.getDimens(getApplicationContext(), R.dimen.size_60))//设置悬浮控件上下贴边判定范围
                 .setMoveType(MoveType.SLIDE, 20, 20, 20, 20)
-                //DecelerateInterpolator BounceInterpolator  AccelerateDecelerateInterpolator
+                //DecelerateInterpolator BounceInterpolator  AccelerateDecelerateInterpolator  LinearInterpolator
                 .setMoveStyle(300, new DecelerateInterpolator())
                 .setFilter(true, MainActivity.class, FloatButtonActivity.class)
                 .setViewStateListener(mViewStateListener)
