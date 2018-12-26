@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +18,7 @@ import com.work.common.MainActivity;
 import com.work.common.VApplication;
 import com.work.floatbutton.FloatButton;
 import com.work.floatwindow.FloatWindow;
+import com.work.utils.ActivityTaskManager;
 import com.work.utils.UIUtils;
 
 /**
@@ -43,7 +46,7 @@ public abstract class BaseActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 if (floatWindow.isShowing()) {
-                    floatWindow.setClickable(false);
+                    floatWindow.hide();
                 }
                 final Dialog dialog = new Dialog(BaseActivity.this);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -62,10 +65,14 @@ public abstract class BaseActivity extends FragmentActivity {
                 ivHome.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (floatWindow.getActivities()[0] != MainActivity.class) {
+                        String curActivity = ActivityTaskManager.getInstance().getCurrentActivity().getClass().getName();
+                        Log.e("123", "当前Activity：" + curActivity + "  首页：" + MainActivity.class.getName());
+                        if (!TextUtils.equals(MainActivity.class.getName(), curActivity)) {
                             Intent intent = new Intent(BaseActivity.this, floatWindow.getActivities()[0]);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
+                        } else {
+                            dialog.dismiss();
                         }
                     }
                 });
@@ -81,8 +88,8 @@ public abstract class BaseActivity extends FragmentActivity {
                 dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface d) {
-                        if (!floatWindow.isClickable()) {
-                            floatWindow.setClickable(true);
+                        if (!floatWindow.isShowing()) {
+                            floatWindow.show();
                         }
                     }
                 });

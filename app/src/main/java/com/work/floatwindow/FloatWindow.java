@@ -232,6 +232,7 @@ public class FloatWindow {
 
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
+                    getView().setPressed(true);
                     downX = event.getRawX();
                     downY = event.getRawY();
                     lastX = event.getRawX();
@@ -253,28 +254,62 @@ public class FloatWindow {
                 case MotionEvent.ACTION_UP:
                     upX = event.getRawX();
                     upY = event.getRawY();
-
                     mClick = (Math.abs(upX - downX) > mSlop) || (Math.abs(upY - downY) > mSlop);
                     if (mBuilder.mMoveType == MoveType.SLIDE) {
                         //todo 2018年12月25日 16:29:39 上下内间距
-//                        if (upY + halfHeight > mBuilder.mScreenHeight
-//                                || upY < halfHeight + mBuilder.mScreenHeightLimit) {
-//                            cancelAnimator();
-//                            break;
-//                        }
+                        int[] pos = new int[2];
+                        getView().getLocationOnScreen(pos);
+                        final int viewTop = pos[1];
+                        Log.e("123", "屏幕：" + mBuilder.mScreenWidth + "   "
+                                + mBuilder.mScreenHeight + "  " + mBuilder.mWidth + "     " + mBuilder.mHeight);
+                        Log.w("123", "抬起时： upX: " + upX + "    upY: " + upY
+                                + "   getX: " + mFloatView.getX() + "   getY: " + mFloatView.getY()
+                                + "   X: " + pos[0] + "   Y:" + pos[1] + "   半高: "
+                                + halfHeight + "    状态栏：" + mBuilder.mStatusBarHeight);
+                        //halfHeight 81
 
-                        int startX = mFloatView.getX();
+                        int startY = viewTop;
+                        int endY = mFloatView.getY();
+
+                        boolean overScrollY = false;
+                        if (viewTop < mBuilder.mStatusBarHeight + mBuilder.mSlideTopMargin) {
+                            endY = mBuilder.mSlideTopMargin;
+                            overScrollY = true;
+                        } else if (viewTop > mBuilder.mScreenHeight - mBuilder.mHeight - mBuilder.mSlideBottomMargin - mBuilder.mStatusBarHeight) {
+                            endY = mBuilder.mScreenHeight - mBuilder.mHeight - mBuilder.mSlideBottomMargin - mBuilder.mStatusBarHeight;
+                            overScrollY = true;
+                        }
+
+                        int startX = mFloatView.getX();// mFloatView.getX()
                         int endX = (startX * 2 + v.getWidth() > mBuilder.mScreenWidth) ?
                                 mBuilder.mScreenWidth - v.getWidth() - mBuilder.mSlideRightMargin :
                                 mBuilder.mSlideLeftMargin;
-                        mAnimator = ObjectAnimator.ofInt(startX, endX);
+
+                        if (overScrollY) {
+                            endX = mFloatView.getX();
+                        }
+
+//                      //
+                        if (overScrollY) {
+                            startX = pos[0];
+                            if (startX > mBuilder.mScreenWidth - mBuilder.mWidth - mBuilder.mSlideRightMargin) {
+                                endX = mBuilder.mScreenWidth - v.getWidth() - mBuilder.mSlideRightMargin;
+                            } else if (startX < mBuilder.mSlideLeftMargin) {
+                                endX = mBuilder.mSlideLeftMargin;
+                            }
+                        }
+
+                        PropertyValuesHolder pvhX = PropertyValuesHolder.ofInt("x", startX, endX);
+                        PropertyValuesHolder pvhY = PropertyValuesHolder.ofInt("y", startY, endY);
+                        mAnimator = ObjectAnimator.ofPropertyValuesHolder(pvhX, pvhY);
                         mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                             @Override
                             public void onAnimationUpdate(ValueAnimator animation) {
-                                int x = (int) animation.getAnimatedValue();
-                                mFloatView.updateX(x);
+                                int x = (int) animation.getAnimatedValue("x");
+                                int y = (int) animation.getAnimatedValue("y");
+                                mFloatView.updateXY(x, y);
                                 if (mBuilder.mViewStateListener != null) {
-                                    mBuilder.mViewStateListener.onPositionUpdate(x, (int) upY);
+                                    mBuilder.mViewStateListener.onPositionUpdate(x, y);
                                 }
                             }
                         });
@@ -319,6 +354,8 @@ public class FloatWindow {
                 mAnimator.removeAllListeners();
                 mAnimator = null;
                 if (mBuilder.mViewStateListener != null) {
+                    //解决 selector state_pressed失效问题
+                    getView().setPressed(false);
                     mBuilder.mViewStateListener.onMoveAnimEnd();
                 }
             }
@@ -523,7 +560,7 @@ public class FloatWindow {
         }
 
         private void requestPermissionInner() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {//Android 8.0
                 mLayoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
             } else {
                 mLayoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
@@ -602,12 +639,14 @@ public class FloatWindow {
         private int mMoveType = MoveType.SLIDE;
         private int mSlideLeftMargin;
         private int mSlideRightMargin;
+        private int mSlideTopMargin;
+        private int mSlideBottomMargin;
         private long mDuration = 300;
         private TimeInterpolator mInterpolator;
         private boolean mDesktopShow;
         private PermissionListener mPermissionListener;
         private ViewStateListener mViewStateListener;
-        private int mScreenWidth, mScreenHeight, mScreenHeightLimit;
+        private int mScreenWidth, mScreenHeight, mStatusBarHeight;
 
         private Builder() {
         }
@@ -616,7 +655,7 @@ public class FloatWindow {
             mApplicationContext = applicationContext;
             mScreenWidth = UIUtils.getScreenWidth(applicationContext);
             mScreenHeight = UIUtils.getScreenHeight(applicationContext);
-            mScreenHeightLimit = UIUtils.getStatusBarHeight(applicationContext);
+            mStatusBarHeight = UIUtils.getStatusBarHeight(applicationContext);
         }
 
         public FloatWindow.Builder setView(@NonNull View view) {
@@ -682,7 +721,7 @@ public class FloatWindow {
         }
 
         public FloatWindow.Builder setMoveType(@MoveType.MOVE_TYPE int moveType) {
-            return setMoveType(moveType, 0, 0);
+            return setMoveType(moveType, 0, 0, 0, 0);
         }
 
 
@@ -693,10 +732,13 @@ public class FloatWindow {
          * @param slideLeftMargin  贴边动画左边距，默认为 0
          * @param slideRightMargin 贴边动画右边距，默认为 0
          */
-        public FloatWindow.Builder setMoveType(@MoveType.MOVE_TYPE int moveType, int slideLeftMargin, int slideRightMargin) {
+        public FloatWindow.Builder setMoveType(@MoveType.MOVE_TYPE int moveType, int slideLeftMargin, int slideRightMargin,
+                                               int slideTopMargin, int slideBottomMargin) {
             mMoveType = moveType;
             mSlideLeftMargin = slideLeftMargin;
             mSlideRightMargin = slideRightMargin;
+            mSlideTopMargin = slideTopMargin;
+            mSlideBottomMargin = slideBottomMargin;
             return this;
         }
 

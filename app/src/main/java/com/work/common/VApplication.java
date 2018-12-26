@@ -1,8 +1,10 @@
 package com.work.common;
 
+import android.app.Activity;
 import android.app.Application;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
 import com.work.BuildConfig;
@@ -14,6 +16,7 @@ import com.work.floatwindow.MoveType;
 import com.work.floatwindow.PermissionListener;
 import com.work.floatwindow.Screen;
 import com.work.floatwindow.ViewStateListener;
+import com.work.utils.ActivityTaskManager;
 import com.work.utils.AppUtils;
 import com.work.utils.DaoUtils;
 
@@ -45,6 +48,9 @@ public class VApplication extends Application {
 
         //3 悬浮窗
         initFloatWindow();
+
+        //4 监听Activity生命周期
+        initActivitiesCallbacks();
     }
 
     private static final String TAG = "FloatWindow";
@@ -56,17 +62,17 @@ public class VApplication extends Application {
 
         mFloatWindow = FloatWindow.with(getApplicationContext())
                 .setView(imageView)
-                .setWidth(Screen.WIDTH, 0.15f) //设置悬浮控件宽高
+                .setWidth(Screen.WIDTH, 0.15f) //设置悬浮控件宽高 - 按照屏幕比例
                 .setHeight(Screen.WIDTH, 0.15f)
                 .setX(Screen.WIDTH, 0.82f)//设置悬浮控件屏幕偏移
                 .setY(Screen.HEIGHT, 0.5f)
-                .setMoveType(MoveType.SLIDE, 20, 20)
-                //DecelerateInterpolator BounceInterpolator
-                .setMoveStyle(300, new AccelerateDecelerateInterpolator())
+                .setMoveType(MoveType.SLIDE, 20, 20,20,20)
+                //DecelerateInterpolator BounceInterpolator  AccelerateDecelerateInterpolator
+                .setMoveStyle(300, new DecelerateInterpolator())
                 .setFilter(true, MainActivity.class, FloatButtonActivity.class)
                 .setViewStateListener(mViewStateListener)
                 .setPermissionListener(mPermissionListener)
-                .setDesktopShow(true)
+                .setDesktopShow(false) // 设置Home键回到桌面时，是否仍然显示悬浮控件
                 .build();
     }
 
@@ -120,4 +126,43 @@ public class VApplication extends Application {
         }
     };
 
+    private void initActivitiesCallbacks() {
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+
+            }
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+                ActivityTaskManager.getInstance().setCurrentActivity(activity);
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+
+            }
+        });
+
+    }
 }

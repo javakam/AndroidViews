@@ -1,5 +1,6 @@
 package com.work.floatbutton;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +9,6 @@ import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.os.Build;
 import android.provider.Settings;
-import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -33,20 +33,13 @@ import java.util.List;
  */
 public class FloatButton {
 
-    private WindowManager.LayoutParams mParams = null;
+    private WindowManager.LayoutParams mLayoutParams = null;
     private static FloatButton floatButton;
     private ImageView mImageView;
     private Activity mActivity;
     private WindowManager mWindowManager;
     private List<Class> mActivities;
     private Class mHomePage;//首页
-
-
-    private int mTag = 0;
-    private int midX;
-    private int midY;
-    private int mOldOffsetX;
-    private int mOldOffsetY;
 
     private FloatButton() {
         mActivities = new ArrayList<>();
@@ -104,34 +97,28 @@ public class FloatButton {
         mImageView = new ImageView(mActivity);
         mWindowManager = (WindowManager) mActivity.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         Display defaultDisplay = mWindowManager.getDefaultDisplay();
-        defaultDisplay. getSize(new Point());
+        defaultDisplay.getSize(new Point());
 
-        DisplayMetrics dm = new DisplayMetrics();
-        defaultDisplay.getMetrics(dm);
-        midX = dm.widthPixels / 2;
-        midY = dm.heightPixels / 2;
-
-        mParams = new WindowManager.LayoutParams();
-        mParams.packageName = mActivity.getPackageName();
-        mParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        mParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+        mLayoutParams = new WindowManager.LayoutParams();
+        mLayoutParams.packageName = mActivity.getPackageName();
+        mLayoutParams.width = 100;
+        mLayoutParams.height = 100;
+        mLayoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                 | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 | WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR
                 | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            mParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-        } else if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            mParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
-        } else {
-            mParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
+            mLayoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        } else  {
+            mLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
         }
-        mParams.format = PixelFormat.RGBA_8888;
-        mParams.gravity = Gravity.CENTER_VERTICAL | Gravity.RIGHT;
-        mParams.x = 0;
-        mParams.y = 5;
-
+        mLayoutParams.format = PixelFormat.RGBA_8888;
+        mLayoutParams.gravity = Gravity.CENTER_VERTICAL | Gravity.RIGHT;//窗口位置
+//        mLayoutParams.x = 0;
+//        mLayoutParams.y = 5;
+        mLayoutParams.x = mWindowManager.getDefaultDisplay().getWidth() - 200;
+        mLayoutParams.y = 0;
 
         mImageView.setImageResource(R.drawable.selector_float_button);
         mImageView.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +151,7 @@ public class FloatButton {
 //            }
 //        });
 
-        mWindowManager.addView(mImageView, mParams);
+        mWindowManager.addView(mImageView, mLayoutParams);
     }
 
     /**
@@ -176,73 +163,69 @@ public class FloatButton {
         }
     }
 
-
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
-        float lastX, lastY;
-        int paramX, paramY;
+        int startX, startY;  //起始点
+        boolean isMove;  //是否在移动
+        long startTime;
+        int finalMoveX;  //最后通过动画将mView的X轴坐标移动到finalMoveX
+        int statusBarHeight;  //解决mViewy坐标不准确的bug，这里需要减去状态栏的高度
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            final int action = event.getAction();
-
-            float x = event.getRawX();
-            float y = event.getRawY();
-
-            if (mTag == 0) {
-                mOldOffsetX = mParams.x; // 偏移量
-                mOldOffsetY = mParams.y; // 偏移量
-            }
-
-            switch (action) {
+            switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    lastX = x;
-                    lastY = y;
-                    paramX = mParams.x;
-                    paramY = mParams.y;
-                    break;
-
-                case MotionEvent.ACTION_MOVE:
-                    int dx = (int) (x - lastX);
-                    int dy = (int) (y - lastY);
-                    mParams.x = paramX + dx;
-                    mParams.y = paramY + dy;
-                    mTag = 1;
-
-                    // 更新悬浮窗位置
-                    mWindowManager.updateViewLayout(mImageView, mParams);
-                    break;
-
-                case MotionEvent.ACTION_UP:
-                    int newOffsetX = mParams.x;
-                    int newOffsetY = mParams.y;
-                    if (mOldOffsetX == newOffsetX && mOldOffsetY == newOffsetY) {
-                        updateSettingTableView();
-
-                        if (Math.abs(mOldOffsetX) > midX) {
-                            if (mOldOffsetX > 0) {
-                                mOldOffsetX = midX;
-                            } else {
-                                mOldOffsetX = -midX;
-                            }
-                        }
-
-                        if (Math.abs(mOldOffsetY) > midY) {
-                            if (mOldOffsetY > 0) {
-                                mOldOffsetY = midY;
-                            } else {
-                                mOldOffsetY = -midY;
-                            }
-                        }
-                    } else {
-                        mTag = 0;
+                    startX = (int) event.getX();
+                    startY = (int) event.getY();
+                    startTime = System.currentTimeMillis();
+                    int resourceId = mActivity.getResources().getIdentifier("status_bar_height", "dimen", "android");
+                    if (resourceId > 0) {
+                        statusBarHeight = mActivity.getResources().getDimensionPixelSize(resourceId);
                     }
-                    break;
+                    isMove = false;
+                    return false;
+                case MotionEvent.ACTION_MOVE:
+                    mLayoutParams.x = (int) (event.getRawX() - startX);
+                    //这里修复了刚开始移动的时候，悬浮窗的y坐标是不正确的，要减去状态栏的高度，可以将这个去掉运行体验一下
+                    mLayoutParams.y = (int) (event.getRawY() - startY - statusBarHeight);
+                    updateViewLayout();
+                    isMove = true;
+
+                    return true;
+                case MotionEvent.ACTION_UP:
+                    long curTime = System.currentTimeMillis();
+                    isMove = curTime - startTime > 100;
+
+                    //判断mView是在Window中的位置，以中间为界
+                    if (mLayoutParams.x + mImageView.getMeasuredWidth() / 2 >= mWindowManager.getDefaultDisplay().getWidth() / 2) {
+                        finalMoveX = mWindowManager.getDefaultDisplay().getWidth() - mImageView.getMeasuredWidth();
+                    } else {
+                        finalMoveX = 0;
+                    }
+
+                    //使用动画移动mView
+                    ValueAnimator animator = ValueAnimator.ofInt(mLayoutParams.x, finalMoveX).setDuration(Math.abs(mLayoutParams.x - finalMoveX));
+                    animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            mLayoutParams.x = (int) animation.getAnimatedValue();
+                            updateViewLayout();
+                        }
+                    });
+                    animator.start();
+                    return isMove;
                 default:
                     break;
             }
-            return true;
+            return false;
         }
     };
+
+    private void updateViewLayout() {
+        if (mWindowManager != null && mImageView != null) {
+            mWindowManager.updateViewLayout(mImageView, mLayoutParams);   //更新mView 的位置
+        }
+    }
 
     /**
      * 更新设置页面数据

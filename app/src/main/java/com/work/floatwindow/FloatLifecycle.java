@@ -17,12 +17,13 @@ import android.os.Handler;
  * 2.监听home键，从而及时隐藏
  * 3.resumeCount计时，针对一些只执行onPause不执行onStop的奇葩情况
  */
-public  class FloatLifecycle extends BroadcastReceiver implements Application.ActivityLifecycleCallbacks {
+public class FloatLifecycle extends BroadcastReceiver implements Application.ActivityLifecycleCallbacks {
 
     private static final String SYSTEM_DIALOG_REASON_KEY = "reason";
     private static final String SYSTEM_DIALOG_REASON_HOME_KEY = "homekey";
     private static final long DELAY = 300;
     private Handler mHandler;
+    private Class currentActivity;
     private Class[] activities;
     private boolean showFlag;
     private int startCount;
@@ -62,6 +63,7 @@ public  class FloatLifecycle extends BroadcastReceiver implements Application.Ac
 
     @Override
     public void onActivityResumed(Activity activity) {
+        currentActivity=activity.getClass();
         if (sResumedListener != null) {
             num--;
             if (num == 0) {
@@ -133,7 +135,7 @@ public  class FloatLifecycle extends BroadcastReceiver implements Application.Ac
     public void onActivityDestroyed(Activity activity) {
     }
 
-   public interface LifecycleListener {
+    public interface LifecycleListener {
         void onShow();
 
         void onHide();
@@ -141,7 +143,7 @@ public  class FloatLifecycle extends BroadcastReceiver implements Application.Ac
         void onBackToDesktop();
     }
 
-  public interface ResumedListener {
+    public interface ResumedListener {
         void onResumed();
     }
 }
