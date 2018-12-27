@@ -122,4 +122,8 @@
     <color name="fab_background_color">#00000000</color>
     <color name="dialog_background_color">#fafafa</color>
     <color name="dialog_background_scrim">#CC000000</color>
+
+    <!--Spinner-->
+    <color name="core_spinner_normal">#ccdbf6</color>
+    <color name="core_spinner_pressed">#95a2bc</color>
 </resources>

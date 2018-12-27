@@ -72,4 +72,38 @@
         <!--列表条目选中时显示的箭头-->
         <attr name="picker_itemArrowDrawable" format="reference" />
     </declare-styleable>
+
+
+    <!--支持单选&多选的Spinner-->
+    <declare-styleable name="CommonSpinner">
+        <!--单选、多选-->
+        <attr name="spinnerChoiceMode">
+            <enum name="single" value="1" />
+            <enum name="multiple" value="2" />
+        </attr>
+        <attr name="spinnerLiveUpdate" format="boolean" />
+        <!--文本背景Drawable-->
+        <attr name="spinnerTextBackground" format="reference" />
+        <!--文本默认值-->
+        <attr name="spinnerText" format="string|reference" />
+        <!--文本字体大小-->
+        <attr name="spinnerTextSize" format="dimension|reference" />
+        <!--文本字体颜色-->
+        <attr name="spinnerTextColor" format="color|reference" />
+        <!--文本内间距-->
+        <attr name="spinnerTextPadding" format="dimension|reference" />
+        <!--PopupWindow背景Drawable-->
+        <attr name="spinnerDropBackground" format="reference" />
+        <!--PopupWindow宽度-->
+        <attr name="spinnerDropWidthMode">
+            <enum name="fitText" value="1" />
+            <enum name="fullScreen" value="2" />
+        </attr>
+        <!--PopupWindow ListView Item高度-->
+        <attr name="spinnerDropItemHeight" format="dimension|reference" />
+        <!--PopupWindow ListView Item字体大小-->
+        <attr name="spinnerDropItemTextSize" format="dimension|reference" />
+        <!--PopupWindow ListView Item字体颜色-->
+        <attr name="spinnerDropItemTextColor" format="color|reference" />
+    </declare-styleable>
 </resources>
