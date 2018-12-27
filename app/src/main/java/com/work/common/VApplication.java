@@ -59,7 +59,6 @@ public class VApplication extends Application {
     private void initFloatWindow() {
         ImageView imageView = new ImageView(getApplicationContext());
         imageView.setImageResource(R.drawable.selector_float_button);
-//        imageView.setBackgroundResource(R.drawable.selector_float_button);
         Log.e("123", "屏幕信息：" + this.getResources().getDisplayMetrics().toString() + "     " +
                 this.getResources().getDisplayMetrics().densityDpi);
         final float widgetHeight = this.getResources().getDisplayMetrics().density / 20;
