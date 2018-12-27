@@ -10,3 +10,12 @@
 /captures
 .externalNativeBuild
 .idea/inspectionProfiles/
+.idea/codeStyles/
+.idea/dbnavigator.xml
+.idea/encodings.xml
+.idea/gradle.xml
+.idea/markdown-navigator.xml
+.idea/markdown-navigator/
+.idea/misc.xml
+.idea/runConfigurations.xml
+.idea/vcs.xml
