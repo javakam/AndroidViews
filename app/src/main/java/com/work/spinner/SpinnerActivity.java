@@ -3,6 +3,7 @@ package com.work.spinner;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import com.work.R;
 import com.work.base.BaseActivity;
@@ -23,12 +24,12 @@ import java.util.List;
  */
 public class SpinnerActivity extends BaseActivity {
     private static final String TEXT_ALL = "全部";
-    private static final String TEXT_OTHER = "其他";
-    private static final String TEXT_OTHER_PKG = "其他服务包";
 
     private SingleChoiceSpinner spinnerYear;
     private SingleChoiceSpinner spinnerObject;
     private MultiChoiceSpinner multiChoiceSpinner;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class SpinnerActivity extends BaseActivity {
         spinnerYear = findViewById(R.id.spinner_year);
         spinnerObject = findViewById(R.id.spinner_object);
         multiChoiceSpinner =findViewById(R.id.niceSpinner);
+
 
         List<String> years = new ArrayList<>();
         List<String> objects = new ArrayList<>();
@@ -77,7 +79,6 @@ public class SpinnerActivity extends BaseActivity {
             }
         });
 
-
         spinnerObject.setEditable(true);
         spinnerObject.setTextHint("适用对象");
         spinnerObject.setTxtColor(Color.parseColor("#8f9cb5"));
@@ -95,5 +96,86 @@ public class SpinnerActivity extends BaseActivity {
         //多选
         multiChoiceSpinner.setBackgroundResource(R.drawable.shape_service_package_title);
         multiChoiceSpinner.getCheckedItems();
+
+        /*CommonSpinner*/
+        demoCommonSpinner();
+    }
+
+    /*CommonSpinner*/
+    private CommonSpinner mSpYear;                      //年份选择
+    private CommonSpinner mSpObject;                    //适用对象
+    private CommonSpinner mSpPkgType;                   //服务包类别
+
+    private List<String> mListYears;                    //集合-》年份选择
+    private List<String> mListObjects;                  //集合-》适用对象
+    private List<String> mListPkgTypes;                 //集合-》服务包类别
+
+    private void demoCommonSpinner() {
+        mSpYear = findViewById(R.id.spinner_year2);
+        mSpObject = findViewById(R.id.spinner_object2);
+        mSpPkgType = findViewById(R.id.spinner_package_type);
+
+        //数据筛选
+        mListYears = new ArrayList<>();
+        mListObjects = new ArrayList<>();
+        mListPkgTypes = new ArrayList<>();
+        //年份选择
+        int curYearNum = DateUtils.getYearForSystem();
+        int length = 5;
+        mListYears.add(TEXT_ALL);
+        for (int i = 1; i < length; i++) {
+            mListYears.add(i, String.valueOf(curYearNum + 2 - i));
+        }
+        //适用对象
+        mListObjects.add("老年人");
+        mListObjects.add("高血压");
+        mListObjects.add("糖尿病");
+        mListObjects.add("重性精神病");
+        mListObjects.add("儿童");
+        mListObjects.add("孕产妇");
+        mListObjects.add("贫困人口");
+        mListObjects.add("恶性肿瘤");
+        mListObjects.add("肺结核");
+        mListObjects.add("其他");
+        //服务包类别
+        mListPkgTypes.add("基础服务包");
+        mListPkgTypes.add("初级服务包");
+        mListPkgTypes.add("中级服务包");
+        mListPkgTypes.add("高级服务包");
+        mListPkgTypes.add("其他服务包");
+
+        mSpYear.setDropItems(mListYears);
+        mSpObject.setDropItems(mListObjects);
+        mSpPkgType.setDropItems(mListPkgTypes);
+
+
+
+        //年份选择Item Click监听
+        mSpYear.setOnItemClickListener(new CommonSpinner.OnItemClickListener() {
+            @Override
+            public void onClick() {
+                search(mSpYear.getCheckedItem());
+            }
+        });
+
+        //适用对象Item Click监听
+        mSpObject.setOnItemClickListener(new CommonSpinner.OnItemClickListener() {
+            @Override
+            public void onClick() {
+                search(mSpObject.getCheckedItem());
+            }
+        });
+
+        //服务包类别Item Click监听
+        mSpPkgType.setOnItemClickListener(new CommonSpinner.OnItemClickListener() {
+            @Override
+            public void onClick() {
+                search(mSpPkgType.getCheckedItem());
+            }
+        });
+    }
+
+    private void search(String text) {
+        Toast.makeText(SpinnerActivity.this, "Search : "+text, Toast.LENGTH_SHORT).show();
     }
 }
