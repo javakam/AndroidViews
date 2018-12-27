@@ -3,6 +3,7 @@ package com.work.base;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -97,7 +98,8 @@ public abstract class BaseActivity extends FragmentActivity {
                 dialog.setContentView(contentView);
                 Window window = dialog.getWindow();
                 WindowManager.LayoutParams params = window.getAttributes();
-                params.width = (int) (UIUtils.getScreenWidth(BaseActivity.this) * 0.8);
+                float ratio = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) ? 0.4F : 0.6F;
+                params.width = (int) (UIUtils.getScreenWidth(BaseActivity.this) * ratio);
                 params.height = UIUtils.getScreenHeight(BaseActivity.this) / 3;
                 window.setAttributes(params);
                 window.setBackgroundDrawableResource(R.drawable.rectangle_float_dialog);
