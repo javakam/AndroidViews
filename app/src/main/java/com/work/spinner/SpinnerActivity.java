@@ -3,6 +3,8 @@ package com.work.spinner;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.work.R;
@@ -30,7 +32,6 @@ public class SpinnerActivity extends BaseActivity {
     private MultiChoiceSpinner multiChoiceSpinner;
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,7 @@ public class SpinnerActivity extends BaseActivity {
 
         spinnerYear = findViewById(R.id.spinner_year);
         spinnerObject = findViewById(R.id.spinner_object);
-        multiChoiceSpinner =findViewById(R.id.niceSpinner);
+        multiChoiceSpinner = findViewById(R.id.niceSpinner);
 
 
         List<String> years = new ArrayList<>();
@@ -105,6 +106,7 @@ public class SpinnerActivity extends BaseActivity {
     private CommonSpinner mSpYear;                      //年份选择
     private CommonSpinner mSpObject;                    //适用对象
     private CommonSpinner mSpPkgType;                   //服务包类别
+    private ViewGroup mFlServiceReset;                  //重置功能
 
     private List<String> mListYears;                    //集合-》年份选择
     private List<String> mListObjects;                  //集合-》适用对象
@@ -114,7 +116,7 @@ public class SpinnerActivity extends BaseActivity {
         mSpYear = findViewById(R.id.spinner_year2);
         mSpObject = findViewById(R.id.spinner_object2);
         mSpPkgType = findViewById(R.id.spinner_package_type);
-
+        mFlServiceReset = findViewById(R.id.fl_service_reset);
         //数据筛选
         mListYears = new ArrayList<>();
         mListObjects = new ArrayList<>();
@@ -149,7 +151,6 @@ public class SpinnerActivity extends BaseActivity {
         mSpPkgType.setDropItems(mListPkgTypes);
 
 
-
         //年份选择Item Click监听
         mSpYear.setOnItemClickListener(new CommonSpinner.OnItemClickListener() {
             @Override
@@ -162,7 +163,14 @@ public class SpinnerActivity extends BaseActivity {
         mSpObject.setOnItemClickListener(new CommonSpinner.OnItemClickListener() {
             @Override
             public void onClick() {
-                search(mSpObject.getCheckedItem());
+                StringBuilder skr = new StringBuilder();
+                for (int i = 0; i < mSpObject.getCheckedItems().size(); i++) {
+                    skr.append(mSpObject.getCheckedItems().get(i));
+                    if (i != mSpObject.getCheckedItems().size() - 1) {
+                        skr.append("  ");
+                    }
+                }
+                search(skr.toString());
             }
         });
 
@@ -170,12 +178,37 @@ public class SpinnerActivity extends BaseActivity {
         mSpPkgType.setOnItemClickListener(new CommonSpinner.OnItemClickListener() {
             @Override
             public void onClick() {
-                search(mSpPkgType.getCheckedItem());
+                StringBuilder skr = new StringBuilder();
+                for (int i = 0; i < mSpPkgType.getCheckedItems().size(); i++) {
+                    skr.append(mSpPkgType.getCheckedItems().get(i));
+                    if (i != mSpPkgType.getCheckedItems().size() - 1) {
+                        skr.append("  ");
+                    }
+                }
+                search(skr.toString());
+            }
+        });
+
+        mFlServiceReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSpYear.reset();
+                mSpObject.reset();
+                mSpPkgType.reset();
+//                mElSelectPkgTypeInput.setText("");
             }
         });
     }
 
+    private Toast toast;
+
     private void search(String text) {
-        Toast.makeText(SpinnerActivity.this, "Search : "+text, Toast.LENGTH_SHORT).show();
+        String showText = "Search : " + text;
+        if (toast == null) {
+            toast = Toast.makeText(SpinnerActivity.this, showText, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(showText);
+        }
+        toast.show();
     }
 }
