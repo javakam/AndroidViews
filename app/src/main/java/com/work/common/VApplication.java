@@ -67,7 +67,7 @@ public class VApplication extends Application {
                 .setView(imageView)
                 .setWidth(Screen.WIDTH, widgetHeight) //设置悬浮控件宽高 - 按照屏幕比例 density/20 平板和手机端都能适配
                 .setHeight(Screen.WIDTH, widgetHeight)
-                .setX(Screen.WIDTH, 0.92F)//设置悬浮控件屏幕偏移
+                .setX(Screen.WIDTH, 0.92F) //设置悬浮控件屏幕偏移
                 .setY(Screen.HEIGHT, 0.4F)
                 .setSideScope(UIUtils.getDimens(getApplicationContext(), R.dimen.size_70))//设置悬浮控件上下贴边判定范围
                 .setMoveType(MoveType.SLIDE, 20, 20, 20, 20)
