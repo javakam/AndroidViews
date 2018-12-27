@@ -115,10 +115,9 @@ public class FloatButton {
         }
         mLayoutParams.format = PixelFormat.RGBA_8888;
         mLayoutParams.gravity = Gravity.CENTER_VERTICAL | Gravity.RIGHT;//窗口位置
-//        mLayoutParams.x = 0;
-//        mLayoutParams.y = 5;
-        mLayoutParams.x = mWindowManager.getDefaultDisplay().getWidth() - 200;
-        mLayoutParams.y = 0;
+        mLayoutParams.x = 0;
+        mLayoutParams.y = 5;
+
 
         mImageView.setImageResource(R.drawable.selector_float_button);
         mImageView.setOnClickListener(new View.OnClickListener() {
@@ -132,24 +131,24 @@ public class FloatButton {
                 }
             }
         });
-        mImageView.setOnTouchListener(mTouchListener);
-//        mImageView.setOnTouchListener(new View.OnTouchListener() {
-//            private long mDownTime;
-//
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//                    mDownTime = event.getDownTime();
-//                } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-//                    if (event.getEventTime() - mDownTime > 200) {
-//                        mParams.x = (int) event.getRawX() - 600;
-//                        mParams.y = (int) event.getRawY();
-//                        mWindowManager.updateViewLayout(mImageView, mParams);
-//                    }
-//                }
-//                return false;
-//            }
-//        });
+//        mImageView.setOnTouchListener(mTouchListener);
+        mImageView.setOnTouchListener(new View.OnTouchListener() {
+            private long mDownTime;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    mDownTime = event.getDownTime();
+                } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                    if (event.getEventTime() - mDownTime > 200) {
+                        mLayoutParams.x = (int) event.getRawX() - 600;
+                        mLayoutParams.y = (int) event.getRawY();
+                        mWindowManager.updateViewLayout(mImageView, mLayoutParams);
+                    }
+                }
+                return false;
+            }
+        });
 
         mWindowManager.addView(mImageView, mLayoutParams);
     }

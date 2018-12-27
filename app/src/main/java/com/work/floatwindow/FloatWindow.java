@@ -334,8 +334,7 @@ public class FloatWindow {
                 mAnimator.removeAllListeners();
                 mAnimator = null;
                 if (mBuilder.mViewStateListener != null) {
-                    //解决 selector state_pressed失效问题
-                    getView().setPressed(false);
+                    getView().setPressed(false);//解决 selector.xml state_pressed失效问题
                     mBuilder.mViewStateListener.onMoveAnimEnd();
                 }
             }
@@ -675,6 +674,12 @@ public class FloatWindow {
         }
 
         public FloatWindow.Builder setY(int y) {
+            yOffset = y;
+            return this;
+        }
+
+        public FloatWindow.Builder setXY(int x, int y) {
+            xOffset = x;
             yOffset = y;
             return this;
         }

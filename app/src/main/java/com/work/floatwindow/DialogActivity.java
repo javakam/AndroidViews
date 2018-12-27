@@ -47,18 +47,11 @@ public class DialogActivity extends BaseActivity {
         };
         container.setOnClickListener(dismissListener);
 
-        //todo 2018年12月26日 18:18:41
-        Window window = getWindow();
-        WindowManager.LayoutParams params = window.getAttributes();
-        params.width = (int) (UIUtils.getScreenWidth(this) * 0.8);
-        params.height = UIUtils.getScreenHeight(this) / 3;
-        window.setAttributes(params);
-        window.setBackgroundDrawableResource(R.drawable.rectangle_float_dialog);
 
-        setupSharedEelementTransitions2();
+        setupSharedElementTransitions();
     }
 
-    public void setupSharedEelementTransitions2() {
+    public void setupSharedElementTransitions() {
         ArcMotion arcMotion = new ArcMotion();
         arcMotion.setMinimumHorizontalAngle(50f);
         arcMotion.setMinimumVerticalAngle(50f);
@@ -84,6 +77,15 @@ public class DialogActivity extends BaseActivity {
         }
         getWindow().setSharedElementEnterTransition(sharedEnter);
         getWindow().setSharedElementReturnTransition(sharedReturn);
+
+        //todo 2018年12月26日 18:18:41
+        Window window = getWindow();
+//        window.setBackgroundDrawableResource(R.drawable.rectangle_float_dialog);
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.width = (int) (UIUtils.getScreenWidth(this) * 0.8);
+        params.height = UIUtils.getScreenHeight(this) / 3;
+        window.setAttributes(params);
+
     }
 
     @Override

@@ -129,11 +129,11 @@ public class UIUtils {
     }
 
     public static float getDensity(Context context) {
-        return context.getResources().getDisplayMetrics().density;
+        return getDisplayMetrics(context).density;
     }
 
     public static float getFontDensity(Context context) {
-        return context.getResources().getDisplayMetrics().scaledDensity;
+        return getDisplayMetrics(context).scaledDensity;
     }
 
     /**
@@ -149,7 +149,7 @@ public class UIUtils {
      * 获取屏幕的高
      */
     public static int getScreenHeight(Context context) {
-        return context.getResources().getDisplayMetrics().heightPixels;
+        return getDisplayMetrics(context).heightPixels;
     }
 
     public static int getStatusBarHeight(Context c) {

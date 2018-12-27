@@ -60,14 +60,16 @@ public class VApplication extends Application {
         ImageView imageView = new ImageView(getApplicationContext());
         imageView.setImageResource(R.drawable.selector_float_button);
 //        imageView.setBackgroundResource(R.drawable.selector_float_button);
-
+        Log.e("123", "屏幕信息：" + this.getResources().getDisplayMetrics().toString() + "     " +
+                this.getResources().getDisplayMetrics().densityDpi);
+        final float widgetHeight = this.getResources().getDisplayMetrics().density / 20;
         mFloatWindow = FloatWindow.with(getApplicationContext())
                 .setView(imageView)
-                .setWidth(Screen.WIDTH, 0.15f) //设置悬浮控件宽高 - 按照屏幕比例
-                .setHeight(Screen.WIDTH, 0.15f)
-                .setX(Screen.WIDTH, 0.82f)//设置悬浮控件屏幕偏移
-                .setY(Screen.HEIGHT, 0.5f)
-                .setSideScope(UIUtils.getDimens(getApplicationContext(), R.dimen.size_60))//设置悬浮控件上下贴边判定范围
+                .setWidth(Screen.WIDTH, widgetHeight) //设置悬浮控件宽高 - 按照屏幕比例 density/20 平板和手机端都能适配
+                .setHeight(Screen.WIDTH, widgetHeight)
+                .setX(Screen.WIDTH, 0.92F)//设置悬浮控件屏幕偏移
+                .setY(Screen.HEIGHT, 0.4F)
+                .setSideScope(UIUtils.getDimens(getApplicationContext(), R.dimen.size_70))//设置悬浮控件上下贴边判定范围
                 .setMoveType(MoveType.SLIDE, 20, 20, 20, 20)
                 //DecelerateInterpolator BounceInterpolator  AccelerateDecelerateInterpolator  LinearInterpolator
                 .setMoveStyle(300, new DecelerateInterpolator())

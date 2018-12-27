@@ -3,6 +3,8 @@ package com.work.base;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -36,23 +38,28 @@ public abstract class BaseActivity extends FragmentActivity {
      */
     private FloatButton mFloatButton = FloatButton.getInstance();
 
-    protected FloatWindow floatWindow;
+    private FloatWindow floatWindow;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        floatWindow = VApplication.mFloatWindow;
+        //traditional dialog
+        showTraditionalDialog();
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mFloatButton.show(this);
+//        mFloatButton.show(this);
+    }
 
-        //过渡动画 {}
-        floatWindow = VApplication.mFloatWindow;
-
-
-        //traditional dialog
-//        showTraditionalDialog();
+    public FloatWindow getFloatWindow() {
+        return floatWindow;
     }
 
     private void showTraditionalDialog() {
-        floatWindow.setOnClickListener(new View.OnClickListener() {
+        getFloatWindow().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (floatWindow.isShowing()) {

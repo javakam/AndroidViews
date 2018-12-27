@@ -1,10 +1,6 @@
 package com.work.floatbutton;
 
-import android.app.ActivityOptions;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.transition.AutoTransition;
 import android.support.transition.TransitionManager;
@@ -15,7 +11,6 @@ import android.widget.TextView;
 
 import com.work.R;
 import com.work.base.BaseActivity;
-import com.work.floatwindow.DialogActivity;
 
 public class FloatButtonActivity extends BaseActivity {
     private int INTENT_REQ = 100;
@@ -55,16 +50,16 @@ public class FloatButtonActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        floatWindow.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FloatButtonActivity.this, DialogActivity.class);
-                ActivityOptions options =
-                        ActivityOptions.makeSceneTransitionAnimation(FloatButtonActivity.this, container,
-                                getString(R.string.transition_dialog));//floatWindow.getView()
-                startActivityForResult(intent, INTENT_REQ, options.toBundle());
-            }
-        });
+//        getFloatWindow().setOnClickListener(new View.OnClickListener() {
+//            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(FloatButtonActivity.this, DialogActivity.class);
+//                ActivityOptions options =
+//                        ActivityOptions.makeSceneTransitionAnimation(FloatButtonActivity.this, container,
+//                                getString(R.string.transition_dialog));//floatWindow.getView()
+//                startActivityForResult(intent, INTENT_REQ, options.toBundle());
+//            }
+//        });
     }
 }
