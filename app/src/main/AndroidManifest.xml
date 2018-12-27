@@ -55,6 +55,7 @@
         <activity android:name=".progressbar.ProgressBarActivity" />
         <activity android:name=".progressbar.ProgressBarActivity2" />
         <activity android:name=".progressbar.ProgressBarActivity3" />
+        <activity android:name=".recycler.horizon_date.HorizonRecycleViewActivity" />
         <activity
             android:name=".addresspicker.AddressPickerActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize|layoutDirection|screenLayout"
@@ -63,7 +64,7 @@
         <activity android:name=".basic.BasicViewActivity" />
         <activity android:name=".basic.BasicViewCenterActivity" />
         <activity android:name=".spinner.SpinnerActivity" />
-        <activity android:name=".floatbutton.FloatButtonActivity"></activity>
+        <activity android:name=".floatbutton.FloatButtonActivity"/>
         <activity
             android:name="com.work.floatwindow.FloatActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

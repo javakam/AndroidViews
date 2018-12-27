@@ -50,14 +50,14 @@
             android:textSize="@dimen/font_24" />
     </LinearLayout>
 
-    <com.work.dialog.addresspicker.AddressPicker
+    <com.work.addresspicker.AddressPicker
         android:id="@+id/view_address_picker"
         style="@style/AddressPickerPadLightStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/size_30" />
 
-    <!-- <com.work.dialog.addresspicker.AddressPicker
+    <!--  <com.work.addresspicker.AddressPicker
         android:id="@+id/view_address_picker"
         style="@style/AddressPickerPadDarkStyle"
         android:layout_width="match_parent"

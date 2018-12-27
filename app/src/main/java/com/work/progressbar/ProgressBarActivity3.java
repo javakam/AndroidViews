@@ -27,21 +27,21 @@ public class ProgressBarActivity3 extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_v_progress_bar2);
-        mCircleProgressBar = findViewById(R.id.circleProgressBar);
-        mCircleProgressBar.setStrokeRoundCap(true);
-        //模拟业务情形，已完成 5/8 的目标
-        final int hasFinished = 5;
-        final int total = 8;
-
-        mCircleProgressBar.setPlanProgressBarTextGenerator(new PlanProgressBar.PlanProgressBarTextGenerator() {
-            @Override
-            public String generateText(PlanProgressBar progressBar, int value, int maxValue) {
-//                return 100 * value / maxValue + "%";
-                return String.valueOf(hasFinished);
-            }
-        });
-
-        myHandler.setProgressBar(mCircleProgressBar);
+//        mCircleProgressBar = findViewById(R.id.circleProgressBar);
+//        mCircleProgressBar.setStrokeRoundCap(true);
+//        //模拟业务情形，已完成 5/8 的目标
+//        final int hasFinished = 5;
+//        final int total = 8;
+//
+//        mCircleProgressBar.setPlanProgressBarTextGenerator(new PlanProgressBar.PlanProgressBarTextGenerator() {
+//            @Override
+//            public String generateText(PlanProgressBar progressBar, int value, int maxValue) {
+////                return 100 * value / maxValue + "%";
+//                return String.valueOf(hasFinished);
+//            }
+//        });
+//
+//        myHandler.setProgressBar(mCircleProgressBar);
     }
 
     private class ProgressHandler extends Handler {

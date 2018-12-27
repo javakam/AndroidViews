@@ -48,7 +48,7 @@
             android:textSize="@dimen/font_28" />
     </LinearLayout>
 
-    <com.work.dialog.addresspicker.AddressPicker
+    <com.work.addresspicker.AddressPicker
         android:id="@+id/view_address_picker"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
