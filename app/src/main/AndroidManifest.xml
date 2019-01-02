@@ -36,6 +36,10 @@
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
+    <!--系统级弹窗-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+
     <application
         android:name=".common.VApplication"
         android:allowBackup="true"
@@ -64,7 +68,7 @@
         <activity android:name=".basic.BasicViewActivity" />
         <activity android:name=".basic.BasicViewCenterActivity" />
         <activity android:name=".spinner.SpinnerActivity" />
-        <activity android:name=".floatbutton.FloatButtonActivity"/>
+        <activity android:name=".floatbutton.FloatButtonActivity" />
         <activity
             android:name="com.work.floatwindow.FloatActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

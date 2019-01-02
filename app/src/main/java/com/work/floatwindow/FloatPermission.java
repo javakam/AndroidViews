@@ -13,7 +13,16 @@ import android.view.WindowManager;
 
 import java.lang.reflect.Method;
 
-public class PermissionUtil {
+/**
+ * Title:FloatPermission
+ * <p>
+ * Description:悬浮窗权限
+ * </p>
+ *
+ * @author Changbao
+ * @date 2019/1/2 15:48
+ */
+public class FloatPermission {
     private static final String TAG = "FloatWindow";
 
     public static boolean hasPermission(Context context) {
@@ -24,7 +33,7 @@ public class PermissionUtil {
         }
     }
 
-  public   static boolean hasPermissionOnActivityResult(Context context) {
+    public static boolean hasPermissionOnActivityResult(Context context) {
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O) {
             return hasPermissionForO(context);
         }
@@ -40,7 +49,7 @@ public class PermissionUtil {
      * 理论上6.0以上才需处理权限，但有的国内rom在6.0以下就添加了权限
      * 其实此方式也可以用于判断6.0以上版本，只不过有更简单的canDrawOverlays代替
      */
-    static boolean hasPermissionBelowMarshmallow(Context context) {
+    private static boolean hasPermissionBelowMarshmallow(Context context) {
         try {
             AppOpsManager manager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
             Method dispatchMethod = AppOpsManager.class.getMethod("checkOp", int.class, int.class, String.class);
@@ -74,9 +83,16 @@ public class PermissionUtil {
             mgr.addView(viewToAdd, params);
             mgr.removeView(viewToAdd);
             return true;
-        } catch (Exception e) {Log.e(TAG,"hasPermissionForO e:" + e.toString());
+        } catch (Exception e) {
+            Log.e(TAG, "hasPermissionForO e:" + e.toString());
         }
         return false;
     }
 
+    public interface PermissionListener {
+
+        void onSuccess();
+
+        void onFail();
+    }
 }

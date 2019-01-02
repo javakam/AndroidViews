@@ -14,13 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 用于在内部自动申请权限
- * https://github.com/yhaolpz
+ * Title:FloatActivity
+ * <p>
+ * Description:用于在内部自动申请权限
+ * </p>
+ * @author Changbao
+ * @date 2019/1/2 15:51
  */
 public class FloatActivity extends Activity {
 
-    private static List<PermissionListener> mPermissionListenerList;
-    private static PermissionListener mPermissionListener;
+    private static List<FloatPermission.PermissionListener> mPermissionListenerList;
+    private static FloatPermission.PermissionListener mPermissionListener;
     private static final int REQUEST_CODE = 100;
 
     @Override
@@ -43,7 +47,7 @@ public class FloatActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE) {
-            if (PermissionUtil.hasPermissionOnActivityResult(this)) {
+            if (FloatPermission.hasPermissionOnActivityResult(this)) {
                 mPermissionListener.onSuccess();
             } else {
                 mPermissionListener.onFail();
@@ -52,17 +56,17 @@ public class FloatActivity extends Activity {
         finish();
     }
 
-    static synchronized void request(Context context, PermissionListener permissionListener) {
-        if (PermissionUtil.hasPermission(context)) {
+    static synchronized void request(Context context, FloatPermission.PermissionListener permissionListener) {
+        if (FloatPermission.hasPermission(context)) {
             permissionListener.onSuccess();
             return;
         }
         if (mPermissionListenerList == null) {
             mPermissionListenerList = new ArrayList<>();
-            mPermissionListener = new PermissionListener() {
+            mPermissionListener = new FloatPermission.PermissionListener() {
                 @Override
                 public void onSuccess() {
-                    for (PermissionListener listener : mPermissionListenerList) {
+                    for (FloatPermission.PermissionListener listener : mPermissionListenerList) {
                         listener.onSuccess();
                     }
                     mPermissionListenerList.clear();
@@ -70,7 +74,7 @@ public class FloatActivity extends Activity {
 
                 @Override
                 public void onFail() {
-                    for (PermissionListener listener : mPermissionListenerList) {
+                    for (FloatPermission.PermissionListener listener : mPermissionListenerList) {
                         listener.onFail();
                     }
                     mPermissionListenerList.clear();

@@ -7,26 +7,45 @@ import android.animation.PropertyValuesHolder;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Application;
+import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.IntDef;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.work.R;
+import com.work.common.MainActivity;
+import com.work.floatbutton.FloatButtonActivity;
 import com.work.floatwindow.platform.Miui;
 import com.work.utils.UIUtils;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -57,6 +76,29 @@ public class FloatWindow {
     private float upY;
     private boolean mClick = false;
     private int mSlop;
+
+    public static class MoveType {
+        public static final int FIXED = 0;
+        public static final int INACTIVE = 1;
+        public static final int ACTIVE = 2;
+        public static final int SLIDE = 3;
+        public static final int BACK = 4;
+
+        @IntDef({FIXED, INACTIVE, ACTIVE, SLIDE, BACK})
+        @Retention(RetentionPolicy.SOURCE)
+        @interface MOVE_TYPE {
+        }
+    }
+
+    public static class Screen {
+        public static final int WIDTH = 0;
+        public static final int HEIGHT = 1;
+
+        @IntDef({WIDTH, HEIGHT})
+        @Retention(RetentionPolicy.SOURCE)
+        @interface screenType {
+        }
+    }
 
     private FloatWindow() {
     }
@@ -104,6 +146,95 @@ public class FloatWindow {
     @MainThread
     public static FloatWindow.Builder with(@NonNull Context applicationContext) {
         return mBuilder = new FloatWindow.Builder(applicationContext);
+    }
+
+    public static void create(Application application) {
+        final Context context = application.getApplicationContext();
+
+        ImageView imageView = new ImageView(context);
+        imageView.setImageResource(R.drawable.selector_float_button);
+        Log.e("123", "屏幕信息：" + context.getResources().getDisplayMetrics().toString() + "     " +
+                context.getResources().getDisplayMetrics().densityDpi);
+        final float widgetHeight = context.getResources().getDisplayMetrics().density / 20;
+        final FloatWindow floatWindow = with(context)
+                .setView(imageView)
+                .setWidth(Screen.WIDTH, widgetHeight) //设置悬浮控件宽高--按照屏幕比例 density/20 时平板和手机端都能适配
+                .setHeight(Screen.WIDTH, widgetHeight)
+                .setX(Screen.WIDTH, 0.92F) //设置悬浮控件屏幕偏移
+                .setY(Screen.HEIGHT, 0.4F)
+                .setSideScope(UIUtils.getDimens(context, R.dimen.size_66))//设置悬浮控件上下贴边判定范围
+                .setMoveType(MoveType.SLIDE, 20, 20, 20, 20)
+                //DecelerateInterpolator BounceInterpolator  AccelerateDecelerateInterpolator  LinearInterpolator
+                .setMoveStyle(300, new DecelerateInterpolator())
+                .setFilter(true, MainActivity.class, FloatButtonActivity.class)
+                .setViewStateListener(null)
+                .setPermissionListener(null)
+                .setDesktopShow(false) // 设置Home键回到桌面时，是否仍然显示悬浮控件
+                .build();
+
+        floatWindow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = createSysDialog(context, floatWindow.getFloatLifecycle().getCurActivity());
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface d) {
+                        if (!floatWindow.isShowing()) {
+                            floatWindow.show();
+                        }
+                    }
+                });
+                dialog.show();
+            }
+        });
+    }
+
+    private static Dialog createSysDialog(final Context context, final Activity curActivity) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCanceledOnTouchOutside(true);
+
+        View contentView = LayoutInflater.from(context).inflate(R.layout.item_float_dialog, null, false);
+        ImageView ivHome = contentView.findViewById(R.id.iv_float_home);
+        ImageView ivVoice = contentView.findViewById(R.id.iv_float_voice);
+        ivVoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Toast.makeText(context, "语音控制", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ivHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if (!(curActivity instanceof MainActivity)) {
+                    Log.w("123", "currentActivity : " + curActivity);
+                    Intent intent = new Intent(context, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    context.startActivity(intent);
+                }
+            }
+        });
+
+        dialog.setContentView(contentView);
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        float ratio = (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) ? 0.4F : 0.6F;
+        params.width = (int) (UIUtils.getScreenWidth(context) * ratio);
+        params.height = UIUtils.getScreenHeight(context) / 3;
+        //系统级别Dialog
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            params.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        } else {
+            params.type = WindowManager.LayoutParams.TYPE_TOAST;
+        }
+
+        window.setAttributes(params);
+        window.setBackgroundDrawableResource(R.drawable.rectangle_float_dialog);
+
+        return dialog;
     }
 
     public void show() {
@@ -165,17 +296,6 @@ public class FloatWindow {
         mFloatView.updateY(y);
     }
 
-    public void updateX(int screenType, float ratio) {
-        checkMoveType();
-        mBuilder.xOffset = (int) ((screenType == Screen.WIDTH ? mBuilder.mScreenWidth : mBuilder.mScreenHeight) * ratio);
-        mFloatView.updateX(mBuilder.xOffset);
-    }
-
-    public void updateY(int screenType, float ratio) {
-        checkMoveType();
-        mBuilder.yOffset = (int) ((screenType == Screen.WIDTH ? mBuilder.mScreenWidth : mBuilder.mScreenHeight) * ratio);
-        mFloatView.updateY(mBuilder.yOffset);
-    }
 
     public int getX() {
         return mFloatView.getX();
@@ -190,19 +310,13 @@ public class FloatWindow {
         return mBuilder.mView;
     }
 
-    public Class[] getActivities() {
-        return mActivities;
+    public FloatLifecycle getFloatLifecycle() {
+        return mFloatLifecycle;
     }
 
     public void setOnClickListener(View.OnClickListener l) {
         if (mBuilder != null) {
             mBuilder.mView.setOnClickListener(l);
-        }
-    }
-
-    public void setClickable(boolean clickable) {
-        if (mBuilder != null) {
-            mBuilder.mView.setClickable(clickable);
         }
     }
 
@@ -468,9 +582,9 @@ public class FloatWindow {
         private View mView;
         private int mX, mY;
         private boolean isRemove = false;
-        private PermissionListener mPermissionListener;
+        private FloatPermission.PermissionListener mPermissionListener;
 
-        FloatPhone(Context applicationContext, PermissionListener permissionListener) {
+        FloatPhone(Context applicationContext, FloatPermission.PermissionListener permissionListener) {
             mContext = applicationContext;
             mPermissionListener = permissionListener;
             mWindowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
@@ -509,7 +623,7 @@ public class FloatWindow {
                     requestPermissionInner();
                 } else {
                     mLayoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
-                    Miui.req(mContext, new PermissionListener() {
+                    Miui.req(mContext, new FloatPermission.PermissionListener() {
                         @Override
                         public void onSuccess() {
                             mWindowManager.addView(mView, mLayoutParams);
@@ -542,9 +656,9 @@ public class FloatWindow {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {//Android 8.0
                 mLayoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
             } else {
-                mLayoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+                mLayoutParams.type = WindowManager.LayoutParams.TYPE_TOAST;
             }
-            FloatActivity.request(mContext, new PermissionListener() {
+            FloatActivity.request(mContext, new FloatPermission.PermissionListener() {
                 @Override
                 public void onSuccess() {
                     mWindowManager.addView(mView, mLayoutParams);
@@ -624,7 +738,7 @@ public class FloatWindow {
         private long mDuration = 300;
         private TimeInterpolator mInterpolator;
         private boolean mDesktopShow;
-        private PermissionListener mPermissionListener;
+        private FloatPermission.PermissionListener mPermissionListener;
         private ViewStateListener mViewStateListener;
         private int mScreenWidth, mScreenHeight, mStatusBarHeight;
 
@@ -749,7 +863,7 @@ public class FloatWindow {
             return this;
         }
 
-        public FloatWindow.Builder setPermissionListener(PermissionListener listener) {
+        public FloatWindow.Builder setPermissionListener(FloatPermission.PermissionListener listener) {
             mPermissionListener = listener;
             return this;
         }
@@ -767,6 +881,169 @@ public class FloatWindow {
                 mView = UIUtils.inflate(mApplicationContext, mLayoutId);
             }
             return new FloatWindow(this);
+        }
+    }
+
+    public interface ViewStateListener {
+
+        void onPositionUpdate(int x, int y);
+
+        void onShow();
+
+        void onHide();
+
+        void onDismiss();
+
+        void onMoveAnimStart();
+
+        void onMoveAnimEnd();
+
+        void onBackToDesktop();
+    }
+
+    /**
+     * 用于控制悬浮窗显示周期
+     * <p>
+     * 使用了三种方法针对返回桌面时隐藏悬浮按钮
+     * 1.startCount计数，针对back到桌面可以及时隐藏
+     * 2.监听home键，从而及时隐藏
+     * 3.resumeCount计时，针对一些只执行onPause不执行onStop的奇葩情况
+     */
+    public static class FloatLifecycle extends BroadcastReceiver implements Application.ActivityLifecycleCallbacks {
+
+        private static final String SYSTEM_DIALOG_REASON_KEY = "reason";
+        private static final String SYSTEM_DIALOG_REASON_HOME_KEY = "homekey";
+        private static final long DELAY = 300;
+        private Handler mHandler;
+        private Class[] activities;
+        private Activity curActivity;
+        private boolean showFlag;
+        private int startCount;
+        private int resumeCount;
+        private boolean appBackground;
+        private LifecycleListener mLifecycleListener;
+        private static ResumedListener sResumedListener;
+        private static int num = 0;
+
+
+        FloatLifecycle(Context applicationContext, boolean showFlag, Class[] activities, LifecycleListener lifecycleListener) {
+            this.showFlag = showFlag;
+            this.activities = activities;
+            num++;
+            mLifecycleListener = lifecycleListener;
+            mHandler = new Handler();
+            ((Application) applicationContext).registerActivityLifecycleCallbacks(this);
+            applicationContext.registerReceiver(this, new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+        }
+
+        public static void setResumedListener(ResumedListener resumedListener) {
+            sResumedListener = resumedListener;
+        }
+
+        private boolean needShow(Activity activity) {
+            if (activities == null) {
+                return true;
+            }
+            for (Class a : activities) {
+                if (a.isInstance(activity)) {
+                    return showFlag;
+                }
+            }
+            return !showFlag;
+        }
+
+
+        @Override
+        public void onActivityResumed(Activity activity) {
+            this.curActivity = activity;
+            Log.w("123", "当前活动：" + activity);
+            if (sResumedListener != null) {
+                num--;
+                if (num == 0) {
+                    sResumedListener.onResumed();
+                    sResumedListener = null;
+                }
+            }
+            resumeCount++;
+            if (needShow(activity)) {
+                mLifecycleListener.onShow();
+            } else {
+                mLifecycleListener.onHide();
+            }
+            if (appBackground) {
+                appBackground = false;
+            }
+        }
+
+        @Override
+        public void onActivityPaused(final Activity activity) {
+            resumeCount--;
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (resumeCount == 0) {
+                        appBackground = true;
+                        mLifecycleListener.onBackToDesktop();
+                    }
+                }
+            }, DELAY);
+
+        }
+
+        @Override
+        public void onActivityStarted(Activity activity) {
+            startCount++;
+        }
+
+
+        @Override
+        public void onActivityStopped(Activity activity) {
+            startCount--;
+            if (startCount == 0) {
+                mLifecycleListener.onBackToDesktop();
+            }
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action != null && action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
+                String reason = intent.getStringExtra(SYSTEM_DIALOG_REASON_KEY);
+                if (SYSTEM_DIALOG_REASON_HOME_KEY.equals(reason)) {
+                    mLifecycleListener.onBackToDesktop();
+                }
+            }
+        }
+
+
+        @Override
+        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+        }
+
+        @Override
+        public void onActivityDestroyed(Activity activity) {
+        }
+
+        public Activity getCurActivity() {
+            return this.curActivity;
+        }
+
+        public interface LifecycleListener {
+
+            void onShow();
+
+            void onHide();
+
+            void onBackToDesktop();
+        }
+
+        public interface ResumedListener {
+
+            void onResumed();
         }
     }
 }

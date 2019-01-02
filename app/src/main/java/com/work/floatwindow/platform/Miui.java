@@ -9,13 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.work.floatwindow.FloatLifecycle;
-import com.work.floatwindow.PermissionListener;
-import com.work.floatwindow.PermissionUtil;
+import com.work.floatwindow.FloatPermission;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.work.floatwindow.FloatWindow.FloatLifecycle;
 
 /**
  * <p>
@@ -47,8 +47,8 @@ public class Miui {
     private static final String MIUI_7 = "V7";
     private static final String MIUI_8 = "V8";
     private static final String MIUI_9 = "V9";
-    private static List<PermissionListener> mPermissionListenerList;
-    private static PermissionListener mPermissionListener;
+    private static List<FloatPermission.PermissionListener> mPermissionListenerList;
+    private static FloatPermission.PermissionListener mPermissionListener;
 
     public static boolean rom() {
         return Build.MANUFACTURER.equals(FACTORY);
@@ -61,17 +61,17 @@ public class Miui {
     /**
      * Android6.0以下申请权限
      */
-    public static void req(final Context context, PermissionListener permissionListener) {
-        if (PermissionUtil.hasPermission(context)) {
+    public static void req(final Context context, FloatPermission.PermissionListener permissionListener) {
+        if (FloatPermission.hasPermission(context)) {
             permissionListener.onSuccess();
             return;
         }
         if (mPermissionListenerList == null) {
             mPermissionListenerList = new ArrayList<>();
-            mPermissionListener = new PermissionListener() {
+            mPermissionListener = new FloatPermission.PermissionListener() {
                 @Override
                 public void onSuccess() {
-                    for (PermissionListener listener : mPermissionListenerList) {
+                    for (FloatPermission.PermissionListener listener : mPermissionListenerList) {
                         listener.onSuccess();
                     }
                     mPermissionListenerList.clear();
@@ -79,7 +79,7 @@ public class Miui {
 
                 @Override
                 public void onFail() {
-                    for (PermissionListener listener : mPermissionListenerList) {
+                    for (FloatPermission.PermissionListener listener : mPermissionListenerList) {
                         listener.onFail();
                     }
                     mPermissionListenerList.clear();
@@ -110,7 +110,7 @@ public class Miui {
         FloatLifecycle.setResumedListener(new FloatLifecycle.ResumedListener() {
             @Override
             public void onResumed() {
-                if (PermissionUtil.hasPermission(context)) {
+                if (FloatPermission.hasPermission(context)) {
                     mPermissionListener.onSuccess();
                 } else {
                     mPermissionListener.onFail();
