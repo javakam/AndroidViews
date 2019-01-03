@@ -39,6 +39,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.work.R;
+import com.work.basic.animation.BasicViewAnimActivity;
 import com.work.common.MainActivity;
 import com.work.floatbutton.FloatButtonActivity;
 import com.work.floatwindow.platform.Miui;
@@ -166,7 +167,7 @@ public class FloatWindow {
                 .setMoveType(MoveType.SLIDE, 20, 20, 20, 20)
                 //DecelerateInterpolator BounceInterpolator  AccelerateDecelerateInterpolator  LinearInterpolator
                 .setMoveStyle(300, new DecelerateInterpolator())
-                .setFilter(true, MainActivity.class, FloatButtonActivity.class)
+                .setFilter(true, MainActivity.class, FloatButtonActivity.class, BasicViewAnimActivity.class)
                 .setViewStateListener(null)
                 .setPermissionListener(null)
                 .setDesktopShow(false) // 设置Home键回到桌面时，是否仍然显示悬浮控件
@@ -175,7 +176,7 @@ public class FloatWindow {
         floatWindow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialog = createSysDialog(context, floatWindow.getFloatLifecycle().getCurActivity());
+                final Dialog dialog = createSysDialog(context, floatWindow.getLifeCycle().getCurActivity());
                 dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface d) {
@@ -201,7 +202,8 @@ public class FloatWindow {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Toast.makeText(context, "语音控制", Toast.LENGTH_SHORT).show();
+                curActivity.recreate();
+                Toast.makeText(context, "recreate", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -310,7 +312,7 @@ public class FloatWindow {
         return mBuilder.mView;
     }
 
-    public FloatLifecycle getFloatLifecycle() {
+    public FloatLifecycle getLifeCycle() {
         return mFloatLifecycle;
     }
 

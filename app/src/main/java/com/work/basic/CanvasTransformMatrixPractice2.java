@@ -11,7 +11,7 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
+import android.view.animation.BounceInterpolator;
 
 import com.work.R;
 
@@ -46,7 +46,7 @@ public class CanvasTransformMatrixPractice2 extends View {
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.maps);
 
         animator.setDuration(2500);
-        animator.setInterpolator(new LinearInterpolator());
+        animator.setInterpolator(new BounceInterpolator());
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.REVERSE);
     }

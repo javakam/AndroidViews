@@ -67,6 +67,7 @@
         <activity android:name=".shadowline.ShadowLineActivity" />
         <activity android:name=".basic.BasicViewActivity" />
         <activity android:name=".basic.BasicViewCenterActivity" />
+        <activity android:name=".basic.animation.BasicViewAnimActivity" />
         <activity android:name=".spinner.SpinnerActivity" />
         <activity android:name=".floatbutton.FloatButtonActivity" />
         <activity
