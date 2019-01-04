@@ -34,7 +34,7 @@ public enum UIRouter {
     BASIC_VIEW(6, "绘制基础1-3", R.drawable.ic_launcher_background, BasicViewActivity.class),
     BASIC_VIEW_CENTER(7, "绘制基础4", R.drawable.ic_launcher_background, BasicViewCenterActivity.class),
     BASIC_VIEW_ANIM(8, "绘制基础-属性动画", R.drawable.ic_launcher_background, BasicViewAnimActivity.class),
-    //    STRING_BUILDER(8, "多层SpannableStringBuilder", R.drawable.ic_launcher_background, StringBuilderActivity.class),
+    // STRING_BUILDER(8, "多层SpannableStringBuilder", R.drawable.ic_launcher_background, StringBuilderActivity.class),
     SPINNER(9, "下拉框", R.drawable.ic_launcher_background, SpinnerActivity.class),
     FLOAT_BUTTON(10, "全局悬浮窗", R.drawable.ic_launcher_background, FloatButtonActivity.class);
 

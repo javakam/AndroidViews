@@ -27,15 +27,92 @@
         <com.work.basic.animation.AnimObjectAnimator
             android:id="@+id/view_anim_obj"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="200dp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:background="#ff8800" />
 
-        <com.work.basic.animation.AnimEvaluator
-            android:id="@+id/view_anim_evaluator"
+        <LinearLayout
+            android:id="@+id/ll_anim_evaluator_content"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#ff8800" />
+
+        <com.work.basic.animation.AnimEvaluatorPoint
+            android:id="@+id/view_anim_evaluator_point"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_gravity="left|top"
+            android:background="@color/color_gray_light" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#ff8800" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="PropertyValuesHolder 适用于【同一个】动画中改变多个属性"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_anim_pvh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="center"
+                android:src="@drawable/music" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#ff8800" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="AnimatorSet 多个动画配合执行"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_anim_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="center"
+                android:src="@drawable/music" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#ff8800" />
+
+        <com.work.basic.animation.AnimPvhKeyframeProgress
+            android:id="@+id/view_anim_pvh_keyframe"
             android:layout_width="match_parent"
             android:layout_height="300dp" />
 

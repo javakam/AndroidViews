@@ -1,17 +1,13 @@
 package com.work.basic.animation;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-
-import com.work.R;
 
 /**
  * Title: AnimObjectAnimator
@@ -55,11 +51,7 @@ public class AnimObjectAnimator extends View {
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStrokeWidth(20);
 
-        Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.music)).getBitmap();
-        canvas.drawBitmap(bitmap, 30, 50, paint);
-
-        RectF arcRectF = new RectF(230, 30, 500, 260);
+        RectF arcRectF = new RectF(200, 100, 500, 260);
         canvas.drawArc(arcRectF, 135, progress * 2.7f, false, paint);
-
     }
 }
