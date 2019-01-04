@@ -273,8 +273,8 @@ public class BasicViewAnimActivity extends BaseActivity {
                 ObjectAnimator.ofPropertyValuesHolder(animPvhKeyframeProgress, pvhKeyframeHolder);
         animatorPvhKeyframe.setDuration(10000);
         animatorPvhKeyframe.setInterpolator(new LinearInterpolator());
-//        animatorPvhKeyframe.setRepeatCount(100);
-//        animatorPvhKeyframe.setRepeatMode(ValueAnimator.RESTART);
+        animatorPvhKeyframe.setRepeatCount(3);
+        animatorPvhKeyframe.setRepeatMode(ValueAnimator.RESTART);
         animatorPvhKeyframe.start();
 
         /*
@@ -286,7 +286,6 @@ public class BasicViewAnimActivity extends BaseActivity {
         使用 PropertyValuesHolder.ofKeyframe() 来把一个属性拆分成多段，执行更加精细的属性动画。
          */
 
-
         //另外 ValueAnimator 最基本的轮子
         /*
         额外简单说一下 ValuesAnimator。很多时候，你用不到它，
@@ -297,7 +296,6 @@ public class BasicViewAnimActivity extends BaseActivity {
         比如有的时候，你要给一个第三方控件做动画，你需要更新的那个属性没有 setter 方法，
         只能直接修改，这样的话 ObjectAnimator 就不灵了啊。
         怎么办？这个时候你就可以用 ValueAnimator，在它的 onUpdate() 里面更新这个属性的值，并且手动调用 invalidate()。
-
 
         ViewPropertyAnimator、ObjectAnimator、ValueAnimator 这三种 Animator，
         它们其实是一种递进的关系：从左到右依次变得更加难用，也更加灵活。
