@@ -3,9 +3,9 @@
     <!--常用Alpha值16进制黑白带命名-->
     <!--http://www.jcodecraeer.com/plus/view.php?aid=9653-->
 
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#ffffff</color>
 
     <!--文字颜色-->
     <color name="font_black_05">#999999</color>

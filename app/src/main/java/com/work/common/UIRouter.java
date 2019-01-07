@@ -3,8 +3,9 @@ package com.work.common;
 import com.work.R;
 import com.work.addresspicker.AddressPickerActivity;
 import com.work.basic.BasicViewActivity;
-import com.work.basic.animation.BasicViewAnimActivity;
 import com.work.basic.BasicViewCenterActivity;
+import com.work.basic.animation.BasicViewAnimActivity;
+import com.work.calendar.CalendarActivity;
 import com.work.floatbutton.FloatButtonActivity;
 import com.work.progressbar.ProgressBarActivity;
 import com.work.progressbar.ProgressBarActivity2;
@@ -36,7 +37,8 @@ public enum UIRouter {
     BASIC_VIEW_ANIM(8, "绘制基础-属性动画", R.drawable.ic_launcher_background, BasicViewAnimActivity.class),
     // STRING_BUILDER(8, "多层SpannableStringBuilder", R.drawable.ic_launcher_background, StringBuilderActivity.class),
     SPINNER(9, "下拉框", R.drawable.ic_launcher_background, SpinnerActivity.class),
-    FLOAT_BUTTON(10, "全局悬浮窗", R.drawable.ic_launcher_background, FloatButtonActivity.class);
+    FLOAT_BUTTON(10, "全局悬浮窗", R.drawable.ic_launcher_background, FloatButtonActivity.class),
+    Calendar(11, "日历", R.drawable.ic_launcher_background, CalendarActivity.class);
 
     public static Class<?> findClassById(int id) {
         for (UIRouter r : UIRouter.values()) {

@@ -19,3 +19,14 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# 针对 CalendarView 使用混淆
+-keep class your project path.MonthView {
+    public <init>(android.content.Context);
+}
+-keep class your project path.WeekBar {
+    public <init>(android.content.Context);
+}
+-keep class your project path.WeekView {
+    public <init>(android.content.Context);
+}
