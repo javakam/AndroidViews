@@ -90,6 +90,44 @@
         </FrameLayout>
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/iv_month_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2019年" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="1月" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_month_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher" />
+    </LinearLayout>
+
     <com.haibin.calendarview.CalendarLayout
         android:id="@+id/calendarLayout"
         android:layout_width="match_parent"
@@ -110,21 +148,20 @@
             app:current_month_text_color="#333333"
             app:max_year="2020"
             app:min_year="2004"
-            app:month_view="com.work.calendar.CustomRangeMonthView"
+            app:month_view="com.work.calendar.CustomMonthView"
             app:month_view_show_mode="mode_fix"
             app:other_month_lunar_text_color="#e1e1e1"
             app:other_month_text_color="#e1e1e1"
             app:scheme_text="假"
             app:scheme_text_color="#333"
             app:scheme_theme_color="#128c4b"
-            app:select_mode="range_mode"
             app:selected_lunar_text_color="#fff"
             app:selected_text_color="#fff"
             app:selected_theme_color="#046cea"
             app:week_background="#fff"
             app:week_start_with="sun"
             app:week_text_color="#e1e1e1"
-            app:week_view="com.work.calendar.CustomRangeWeekView"
+            app:week_view="com.work.calendar.CustomWeekView"
             app:year_view_day_text_color="#333333"
             app:year_view_day_text_size="9sp"
             app:year_view_month_text_color="#ff0000"

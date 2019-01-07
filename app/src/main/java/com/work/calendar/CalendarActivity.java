@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -39,6 +40,10 @@ public class CalendarActivity extends BaseActivity implements
 
     TextView mTextCurrentDay;
 
+    ImageView mIvPrevMonth;
+
+    ImageView mIvNextvMonth;
+
     CalendarView mCalendarView;
 
     RelativeLayout mRelativeTool;
@@ -61,6 +66,8 @@ public class CalendarActivity extends BaseActivity implements
         mTextMonthDay = (TextView) findViewById(R.id.tv_month_day);
         mTextYear = (TextView) findViewById(R.id.tv_year);
         mTextLunar = (TextView) findViewById(R.id.tv_lunar);
+        mIvPrevMonth = findViewById(R.id.iv_month_sub);
+        mIvNextvMonth = findViewById(R.id.iv_month_add);
         mRelativeTool = (RelativeLayout) findViewById(R.id.rl_tool);
         mCalendarView = (CalendarView) findViewById(R.id.calendarView);
         mTextCurrentDay = (TextView) findViewById(R.id.tv_current_day);
@@ -81,6 +88,18 @@ public class CalendarActivity extends BaseActivity implements
             @Override
             public void onClick(View v) {
                 mCalendarView.scrollToCurrent();
+            }
+        });
+        mIvPrevMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCalendarView.scrollToPre(true);
+            }
+        });
+        mIvNextvMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCalendarView.scrollToNext(true);
             }
         });
         mCalendarLayout = (CalendarLayout) findViewById(R.id.calendarLayout);
