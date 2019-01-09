@@ -16,7 +16,7 @@ import com.haibin.calendarview.MonthView;
  * Created by huanghaibin on 2018/2/9.
  */
 
-public class CustomMonthView extends MonthView {
+public class CalendarMonthView extends MonthView {
 
     private int mRadius;
 
@@ -56,7 +56,7 @@ public class CustomMonthView extends MonthView {
 
     private float mSchemeBaseLine;
 
-    public CustomMonthView(Context context) {
+    public CalendarMonthView(Context context) {
         super(context);
 
         mTextPaint.setTextSize(dipToPx(context, 8));
@@ -97,10 +97,10 @@ public class CustomMonthView extends MonthView {
         //兼容硬件加速无效的代码
         setLayerType(View.LAYER_TYPE_SOFTWARE, mSelectedPaint);
         //4.0以上硬件加速会导致无效
-        mSelectedPaint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.SOLID));
+        mSelectedPaint.setMaskFilter(new BlurMaskFilter(10, BlurMaskFilter.Blur.SOLID));
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, mSchemeBasicPaint);
-        mSchemeBasicPaint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.SOLID));
+        mSchemeBasicPaint.setMaskFilter(new BlurMaskFilter(10, BlurMaskFilter.Blur.SOLID));
 
     }
 
@@ -126,7 +126,7 @@ public class CustomMonthView extends MonthView {
         if (isSelected) {
             mPointPaint.setColor(Color.WHITE);
         } else {
-            mPointPaint.setColor(Color.parseColor("#FFA800"));//Color.GRAY
+            mPointPaint.setColor(Color.GRAY);
         }
 
         canvas.drawCircle(x + mItemWidth / 2, y + mItemHeight - 3 * mPadding, mPointRadius, mPointPaint);
@@ -142,11 +142,11 @@ public class CustomMonthView extends MonthView {
             canvas.drawCircle(cx, cy, mRadius, mCurrentDayPaint);
         }
 
-//        if (hasScheme) {
-//            canvas.drawCircle(x + mItemWidth - mPadding - mCircleRadius / 2, y + mPadding + mCircleRadius, mCircleRadius, mSchemeBasicPaint);
-//            mTextPaint.setColor(calendar.getSchemeColor());
-//            canvas.drawText(calendar.getScheme(), x + mItemWidth - mPadding - mCircleRadius, y + mPadding + mSchemeBaseLine, mTextPaint);
-//        }
+        if (hasScheme) {
+            canvas.drawCircle(x + mItemWidth - mPadding - mCircleRadius / 2, y + mPadding + mCircleRadius, mCircleRadius, mSchemeBasicPaint);
+            mTextPaint.setColor(calendar.getSchemeColor());
+            canvas.drawText(calendar.getScheme(), x + mItemWidth - mPadding - mCircleRadius, y + mPadding + mSchemeBaseLine, mTextPaint);
+        }
 
         //当然可以换成其它对应的画笔就不麻烦，
         if (calendar.isWeekend() && calendar.isCurrentMonth()) {

@@ -99,10 +99,10 @@ public class CustomWeekView extends WeekView {
         //兼容硬件加速无效的代码
         setLayerType(View.LAYER_TYPE_SOFTWARE, mSelectedPaint);
         //4.0以上硬件加速会导致无效
-        mSelectedPaint.setMaskFilter(new BlurMaskFilter(15, BlurMaskFilter.Blur.SOLID));
+        mSelectedPaint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.SOLID));
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, mSchemeBasicPaint);
-        mSchemeBasicPaint.setMaskFilter(new BlurMaskFilter(15, BlurMaskFilter.Blur.SOLID));
+        mSchemeBasicPaint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.SOLID));
     }
 
 
@@ -144,13 +144,11 @@ public class CustomWeekView extends WeekView {
             canvas.drawCircle(cx, cy, mRadius, mCurrentDayPaint);
         }
 
-        if(hasScheme){
-            canvas.drawCircle(x + mItemWidth - mPadding - mCircleRadius / 2, mPadding + mCircleRadius, mCircleRadius, mSchemeBasicPaint);
-
-            mTextPaint.setColor(calendar.getSchemeColor());
-
-            canvas.drawText(calendar.getScheme(), x + mItemWidth - mPadding - mCircleRadius, mPadding + mSchemeBaseLine, mTextPaint);
-        }
+//        if(hasScheme){
+//            canvas.drawCircle(x + mItemWidth - mPadding - mCircleRadius / 2, mPadding + mCircleRadius, mCircleRadius, mSchemeBasicPaint);
+//            mTextPaint.setColor(calendar.getSchemeColor());
+//            canvas.drawText(calendar.getScheme(), x + mItemWidth - mPadding - mCircleRadius, mPadding + mSchemeBaseLine, mTextPaint);
+//        }
 
         if (calendar.isWeekend() && calendar.isCurrentMonth()) {
             mCurMonthTextPaint.setColor(0xFF489dff);

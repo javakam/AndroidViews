@@ -3,4 +3,8 @@
     <string name="test_short_4">测试测试</string>
 
     <string name="transition_dialog">transition_dialog</string>
+
+
+    <!--自定义日历-->
+    <string name="calendar_date">%1$d年&#160;%2$d月</string>
 </resources>

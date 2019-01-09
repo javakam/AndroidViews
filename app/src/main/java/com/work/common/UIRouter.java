@@ -2,10 +2,12 @@ package com.work.common;
 
 import com.work.R;
 import com.work.addresspicker.AddressPickerActivity;
+import com.work.banner.BannerActivity;
 import com.work.basic.BasicViewActivity;
 import com.work.basic.BasicViewCenterActivity;
 import com.work.basic.animation.BasicViewAnimActivity;
 import com.work.calendar.CalendarActivity;
+import com.work.calendar.CustomCalendarActivity;
 import com.work.floatbutton.FloatButtonActivity;
 import com.work.progressbar.ProgressBarActivity;
 import com.work.progressbar.ProgressBarActivity2;
@@ -38,7 +40,9 @@ public enum UIRouter {
     // STRING_BUILDER(8, "多层SpannableStringBuilder", R.drawable.ic_launcher_background, StringBuilderActivity.class),
     SPINNER(9, "下拉框", R.drawable.ic_launcher_background, SpinnerActivity.class),
     FLOAT_BUTTON(10, "全局悬浮窗", R.drawable.ic_launcher_background, FloatButtonActivity.class),
-    Calendar(11, "日历", R.drawable.ic_launcher_background, CalendarActivity.class);
+    Calendar1(11, "日历", R.drawable.ic_launcher_background, CalendarActivity.class),
+    Calendar2(12, "日历-自定义", R.drawable.ic_launcher_background, CustomCalendarActivity.class),
+    BANNER(13, "广告轮播", R.drawable.ic_launcher_background, BannerActivity.class);
 
     public static Class<?> findClassById(int id) {
         for (UIRouter r : UIRouter.values()) {

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.haibin.calendarview.Calendar;
@@ -32,23 +31,16 @@ public class CalendarActivity extends BaseActivity implements
         CalendarView.OnCalendarSelectListener,
         CalendarView.OnYearChangeListener {
 
-    TextView mTextMonthDay;
+    private TextView mTextMonthDay;
+    private TextView mTextYear;
+    private TextView mTextLunar;
+    private TextView mTextCurrentDay;
 
-    TextView mTextYear;
-
-    TextView mTextLunar;
-
-    TextView mTextCurrentDay;
-
-    ImageView mIvPrevMonth;
-
-    ImageView mIvNextvMonth;
-
-    CalendarView mCalendarView;
-
-    RelativeLayout mRelativeTool;
+    private ImageView mIvPrevMonth;
+    private ImageView mIvNextMonth;
     private int mYear;
-    CalendarLayout mCalendarLayout;
+    private CalendarLayout mCalendarLayout;
+    private CalendarView mCalendarView;
 
     public static void show(Context context) {
         context.startActivity(new Intent(context, CalendarActivity.class));
@@ -57,6 +49,7 @@ public class CalendarActivity extends BaseActivity implements
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_calendar);
         initView();
         initData();
@@ -66,9 +59,9 @@ public class CalendarActivity extends BaseActivity implements
         mTextMonthDay = (TextView) findViewById(R.id.tv_month_day);
         mTextYear = (TextView) findViewById(R.id.tv_year);
         mTextLunar = (TextView) findViewById(R.id.tv_lunar);
+
         mIvPrevMonth = findViewById(R.id.iv_month_sub);
-        mIvNextvMonth = findViewById(R.id.iv_month_add);
-        mRelativeTool = (RelativeLayout) findViewById(R.id.rl_tool);
+        mIvNextMonth = findViewById(R.id.iv_month_add);
         mCalendarView = (CalendarView) findViewById(R.id.calendarView);
         mTextCurrentDay = (TextView) findViewById(R.id.tv_current_day);
         mTextMonthDay.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +89,7 @@ public class CalendarActivity extends BaseActivity implements
                 mCalendarView.scrollToPre(true);
             }
         });
-        mIvNextvMonth.setOnClickListener(new View.OnClickListener() {
+        mIvNextMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCalendarView.scrollToNext(true);

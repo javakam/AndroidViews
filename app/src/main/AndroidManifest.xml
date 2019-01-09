@@ -86,6 +86,8 @@
         </activity>
 
         <activity android:name=".calendar.CalendarActivity" />
+        <activity android:name=".calendar.CustomCalendarActivity" />
+        <activity android:name=".banner.BannerActivity" />
 
         <meta-data
             android:name="CHANNEL"
