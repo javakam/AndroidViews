@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    android:orientation="vertical">
+
+    <com.work.banner.SimpleBanner
+        android:id="@+id/simple_banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size_30"
+        android:background="@color/color_com_bg" />
+
+    <com.work.banner.CustomBanner
+        android:id="@+id/custom_banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size_40"
+        android:background="@color/color_com_bg" />
+</LinearLayout>
