@@ -9,14 +9,11 @@ import android.graphics.Rect;
 import android.support.v4.content.ContextCompat;
 
 import com.work.R;
-import com.work.calendar.local.calendarview.Calendar;
 import com.work.calendarnew.calendar.CalendarView;
 import com.work.calendarnew.calendar.CustomDate;
 import com.work.calendarnew.calendar.DateUtil;
 import com.work.calendarnew.calendar.TextDrawFormat;
 import com.work.utils.UIUtils;
-
-import java.util.List;
 
 /**
  * Created by huang on 2017/11/22.
@@ -77,14 +74,17 @@ public class CustomTextDrawFormat extends TextDrawFormat {
 
     @Override
     public void onDrawScheme(Canvas canvas, int type, Rect rect, Paint paint) {
-        List<Calendar.Scheme> schemes = calendarView.getSchemes();
-        if (schemes != null && schemes.size() != 0) {
-            for (Calendar.Scheme scheme : schemes) {
-                paint.setAntiAlias(true);
-                paint.setColor(Color.parseColor("#FFA800"));
-                canvas.drawCircle(rect.centerX(), rect.bottom - 6, 3, paint);
-            }
-        }
+//        List<Calendar.Scheme> schemes = calendarView.getSchemes();
+//        if (schemes != null && schemes.size() != 0) {
+//            for (Calendar.Scheme scheme : schemes) {
+//                paint.setAntiAlias(true);
+//                paint.setColor(Color.parseColor("#FFA800"));
+//                canvas.drawCircle(rect.centerX(), rect.bottom - 6, 3, paint);
+//            }
+//        }
+        paint.setAntiAlias(true);
+        paint.setColor(Color.parseColor("#FFA800"));
+        canvas.drawCircle(rect.centerX(), rect.bottom - 6, 3, paint);
     }
 
     @Override
