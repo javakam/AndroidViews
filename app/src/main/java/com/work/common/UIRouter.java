@@ -6,8 +6,9 @@ import com.work.banner.BannerActivity;
 import com.work.basic.BasicViewActivity;
 import com.work.basic.BasicViewCenterActivity;
 import com.work.basic.animation.BasicViewAnimActivity;
-import com.work.calendar.CalendarActivity;
-import com.work.calendar.CustomCalendarActivity;
+import com.work.calendar.local.CustomCalendarActivity;
+import com.work.calendar.remote.CalendarActivity;
+import com.work.calendarnew.CalendarMonthActivity;
 import com.work.floatbutton.FloatButtonActivity;
 import com.work.progressbar.ProgressBarActivity;
 import com.work.progressbar.ProgressBarActivity2;
@@ -42,7 +43,8 @@ public enum UIRouter {
     FLOAT_BUTTON(10, "全局悬浮窗", R.drawable.ic_launcher_background, FloatButtonActivity.class),
     Calendar1(11, "日历", R.drawable.ic_launcher_background, CalendarActivity.class),
     Calendar2(12, "日历-自定义", R.drawable.ic_launcher_background, CustomCalendarActivity.class),
-    BANNER(13, "广告轮播", R.drawable.ic_launcher_background, BannerActivity.class);
+    Calendar3(13, "日历-Recycler", R.drawable.ic_launcher_background, CalendarMonthActivity.class),
+    BANNER(14, "广告轮播", R.drawable.ic_launcher_background, BannerActivity.class);
 
     public static Class<?> findClassById(int id) {
         for (UIRouter r : UIRouter.values()) {

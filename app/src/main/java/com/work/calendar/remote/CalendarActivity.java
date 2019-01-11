@@ -1,4 +1,4 @@
-package com.work.calendar;
+package com.work.calendar.remote;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

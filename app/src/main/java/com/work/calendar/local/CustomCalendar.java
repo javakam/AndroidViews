@@ -1,4 +1,4 @@
-package com.work.calendar;
+package com.work.calendar.local;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -8,10 +8,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.haibin.calendarview.Calendar;
-import com.haibin.calendarview.CalendarLayout;
-import com.haibin.calendarview.CalendarView;
 import com.work.R;
+import com.work.calendar.local.calendarview.Calendar;
+import com.work.calendar.local.calendarview.CalendarLayout;
+import com.work.calendar.local.calendarview.CalendarView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * Title: CustomCalendar
  * <p>
- * Description:
+ * Description:组合 CalendarView
  * </p>
  *
  * @author Changbao
@@ -45,10 +45,10 @@ public class CustomCalendar extends LinearLayout implements
 
     public CustomCalendar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setBackgroundResource(R.color.font_btn_press);
         initView(context);
         initData();
     }
-
 
     private void initView(Context context) {
 
@@ -58,6 +58,10 @@ public class CustomCalendar extends LinearLayout implements
         mIvNextMonth = v.findViewById(R.id.iv_month_add);
         mCalendarLayout = v.findViewById(R.id.calendarLayout);
         mCalendarView = v.findViewById(R.id.calendarView);
+
+        this.setBackgroundColor(getResources().getColor(R.color.color_user_main_sleep_line));
+        mCalendarLayout.setBackgroundColor(getResources().getColor(R.color.color_address_phone_item_picked));
+        mCalendarView.getMonthViewPager().setBackgroundColor(getResources().getColor(R.color.color_gray));
 
         mIvPrevMonth.setOnClickListener(new View.OnClickListener() {
             @Override

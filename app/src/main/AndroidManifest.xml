@@ -85,9 +85,10 @@
                 android:value=".floatbutton.FloatButtonActivity" />
         </activity>
 
-        <activity android:name=".calendar.CalendarActivity" />
-        <activity android:name=".calendar.CustomCalendarActivity" />
+        <activity android:name=".calendar.remote.CalendarActivity" />
+        <activity android:name=".calendar.local.CustomCalendarActivity" />
         <activity android:name=".banner.BannerActivity" />
+        <activity android:name=".calendarnew.CalendarMonthActivity" />
 
         <meta-data
             android:name="CHANNEL"

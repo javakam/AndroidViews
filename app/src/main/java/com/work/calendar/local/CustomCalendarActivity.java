@@ -1,4 +1,4 @@
-package com.work.calendar;
+package com.work.calendar.local;
 
 import android.content.Context;
 import android.content.Intent;

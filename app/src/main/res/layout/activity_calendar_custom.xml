@@ -9,14 +9,15 @@
     android:orientation="vertical"
     tools:ignore="RtlHardcoded,HardcodedText,RtlSymmetry,SmallSp">
 
-    <com.work.calendar.CustomCalendar
+    <com.work.calendar.local.CustomCalendar
         android:id="@+id/custom_calendar"
         android:layout_width="match_parent"
-        android:layout_height="450dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <FrameLayout
         android:id="@+id/calendar_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="150dp"
         android:background="@color/color_blue" />
 </LinearLayout>

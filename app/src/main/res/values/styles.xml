@@ -112,4 +112,13 @@
         <item name="picker_itemArrowDrawable">@drawable/icon_address_ok_light</item>
     </style>
 
+    <!--CalendarNew-->
+    <style name="dateStyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/base_black_title_color</item>
+    </style>
 </resources>
