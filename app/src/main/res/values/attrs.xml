@@ -216,9 +216,22 @@
 
     <!--CalendarView New-->
     <declare-styleable name="CalendarViewNew">
-        <attr name="baseTextColor" format="color"/>
-        <attr name="baseTextSize" format="dimension"/>
-        <attr name="rowHeight" format="dimension"/>
+        <attr name="baseTextColor" format="color" />
+        <attr name="baseTextSize" format="dimension" />
+        <attr name="rowHeight" format="dimension" />
+    </declare-styleable>
+
+    <!--分组滑动的 RecyclerView-->
+    <declare-styleable name="GroupRecyclerView">
+        <attr name="group_height" format="dimension" />
+        <attr name="group_child_offset" format="dimension" />
+        <attr name="group_background" format="color" />
+        <attr name="group_text_color" format="color" />
+        <attr name="group_text_size" format="dimension" />
+        <attr name="group_center" format="boolean" />
+        <attr name="group_padding_left" format="dimension" />
+        <attr name="group_padding_right" format="dimension" />
+        <attr name="group_has_header" format="boolean" />
     </declare-styleable>
 
 </resources>

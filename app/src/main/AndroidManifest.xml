@@ -89,6 +89,7 @@
         <activity android:name=".calendar.local.CustomCalendarActivity" />
         <activity android:name=".banner.BannerActivity" />
         <activity android:name=".calendarnew.CalendarMonthActivity" />
+        <activity android:name=".recycler.group.RecyclerGroupExpandActivity" />
 
         <meta-data
             android:name="CHANNEL"

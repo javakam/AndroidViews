@@ -13,6 +13,7 @@ import com.work.floatbutton.FloatButtonActivity;
 import com.work.progressbar.ProgressBarActivity;
 import com.work.progressbar.ProgressBarActivity2;
 import com.work.progressbar.ProgressBarActivity3;
+import com.work.recycler.group.RecyclerGroupExpandActivity;
 import com.work.recycler.horizon_date.HorizonRecycleViewActivity;
 import com.work.shadowline.ShadowLineActivity;
 import com.work.spinner.SpinnerActivity;
@@ -44,7 +45,8 @@ public enum UIRouter {
     Calendar1(11, "日历", R.drawable.ic_launcher_background, CalendarActivity.class),
     Calendar2(12, "日历-自定义", R.drawable.ic_launcher_background, CustomCalendarActivity.class),
     Calendar3(13, "日历-Recycler", R.drawable.ic_launcher_background, CalendarMonthActivity.class),
-    BANNER(14, "广告轮播", R.drawable.ic_launcher_background, BannerActivity.class);
+    BANNER(14, "广告轮播", R.drawable.ic_launcher_background, BannerActivity.class),
+    STICKY_EXPAND_RV(15, "Sticky & Expand Rv", R.drawable.ic_launcher_background, RecyclerGroupExpandActivity.class);
 
     public static Class<?> findClassById(int id) {
         for (UIRouter r : UIRouter.values()) {

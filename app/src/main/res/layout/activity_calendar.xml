@@ -130,7 +130,7 @@
 
     <com.haibin.calendarview.CalendarLayout
         android:id="@+id/calendarLayout"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="150dp"
         android:background="#fff"
         android:orientation="vertical"
@@ -141,9 +141,9 @@
         <com.haibin.calendarview.CalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:background="#fff"
-            app:calendar_padding="5dp"
+            app:calendar_padding="1dp"
             app:current_month_lunar_text_color="#CFCFCF"
             app:current_month_text_color="#333333"
             app:max_year="2020"
@@ -159,6 +159,8 @@
             app:selected_text_color="#fff"
             app:selected_theme_color="#046cea"
             app:week_background="#fff"
+            app:week_bar_height="30dp"
+            app:week_line_margin="5dp"
             app:week_start_with="sun"
             app:week_text_color="#e1e1e1"
             app:week_view="com.work.calendar.remote.CustomRemoteWeekView"

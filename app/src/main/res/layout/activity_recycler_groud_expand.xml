@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:padding="@dimen/size_15">
+
+    <com.work.recycler.group.GroupRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_com_bg"
+        app:group_background="@color/color_com_bg"
+        app:group_center="false"
+        app:group_has_header="false"
+        app:group_height="42dp"
+        app:group_padding_left="16dp"
+        app:group_padding_right="16dp"
+        app:group_text_color="#555555"
+        app:group_text_size="14sp" />
+</FrameLayout>

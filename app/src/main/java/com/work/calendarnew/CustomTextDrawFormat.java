@@ -84,7 +84,7 @@ public class CustomTextDrawFormat extends TextDrawFormat {
 //        }
         paint.setAntiAlias(true);
         paint.setColor(Color.parseColor("#FFA800"));
-        canvas.drawCircle(rect.centerX(), rect.bottom - 6, 3, paint);
+        canvas.drawCircle(rect.centerX(), rect.bottom - 7, 3, paint);
     }
 
     @Override

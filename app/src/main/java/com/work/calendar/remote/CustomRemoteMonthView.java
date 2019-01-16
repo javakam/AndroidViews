@@ -16,7 +16,6 @@ import com.haibin.calendarview.MonthView;
  * 演示一个变态需求的月视图
  * Created by huanghaibin on 2018/2/9.
  */
-
 public class CustomRemoteMonthView extends MonthView {
 
     private int mRadius;
@@ -25,7 +24,6 @@ public class CustomRemoteMonthView extends MonthView {
      * 自定义魅族标记的文本画笔
      */
     private Paint mTextPaint = new Paint();
-
 
     /**
      * 24节气画笔
@@ -59,8 +57,6 @@ public class CustomRemoteMonthView extends MonthView {
 
     public CustomRemoteMonthView(Context context) {
         super(context);
-        mItemHeight = dipToPx(context, 40);
-        mItemWidth = mItemHeight;
 
         mTextPaint.setTextSize(dipToPx(context, 8));
         mTextPaint.setColor(0xffffffff);
@@ -110,6 +106,7 @@ public class CustomRemoteMonthView extends MonthView {
     @Override
     protected void onPreviewHook() {
         mSolarTermTextPaint.setTextSize(mCurMonthLunarTextPaint.getTextSize());
+        Log.e("123", mItemHeight + "   " + mItemWidth);
         mRadius = Math.min(mItemWidth, mItemHeight) / 11 * 5;
     }
 
