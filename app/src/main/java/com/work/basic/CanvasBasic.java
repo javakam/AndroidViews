@@ -68,7 +68,7 @@ public class CanvasBasic extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawLine(0, 0, 300, 60, mLinePaint);
-        canvas.drawText("早上好GoodMorning!", 100, 200, mTextPaint);
+        canvas.drawText("早上好 GoodMorning!", 100, 200, mTextPaint);
 
         //Path
         Path path = new Path();

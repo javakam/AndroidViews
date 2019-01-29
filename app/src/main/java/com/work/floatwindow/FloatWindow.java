@@ -51,7 +51,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
- * Title:SimpleFloatWindow
+ * Title:FloatWindow
  * <p>
  * Description:modify https://github.com/yhaolpz
  * </p>
