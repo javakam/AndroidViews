@@ -1,4 +1,4 @@
-package com.work.calendar.remote;
+package com.work.calendar;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -32,10 +32,6 @@ public class CalendarActivity extends BaseActivity implements
         CalendarView.OnYearChangeListener {
 
     private TextView mTextMonthDay;
-    private TextView mTextYear;
-    private TextView mTextLunar;
-    private TextView mTextCurrentDay;
-
     private ImageView mIvPrevMonth;
     private ImageView mIvNextMonth;
     private int mYear;
@@ -56,14 +52,11 @@ public class CalendarActivity extends BaseActivity implements
     }
 
     protected void initView() {
-        mTextMonthDay = (TextView) findViewById(R.id.tv_month_day);
-        mTextYear = (TextView) findViewById(R.id.tv_year);
-        mTextLunar = (TextView) findViewById(R.id.tv_lunar);
+        mTextMonthDay = (TextView) findViewById(R.id.tv_current_year_month);
 
         mIvPrevMonth = findViewById(R.id.iv_month_sub);
         mIvNextMonth = findViewById(R.id.iv_month_add);
         mCalendarView = (CalendarView) findViewById(R.id.calendarView);
-        mTextCurrentDay = (TextView) findViewById(R.id.tv_current_day);
         mTextMonthDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,17 +65,10 @@ public class CalendarActivity extends BaseActivity implements
                     return;
                 }
                 mCalendarView.showYearSelectLayout(mYear);
-                mTextLunar.setVisibility(View.GONE);
-                mTextYear.setVisibility(View.GONE);
                 mTextMonthDay.setText(String.valueOf(mYear));
             }
         });
-        findViewById(R.id.fl_current).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCalendarView.scrollToCurrent();
-            }
-        });
+
         mIvPrevMonth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,11 +84,8 @@ public class CalendarActivity extends BaseActivity implements
         mCalendarLayout = (CalendarLayout) findViewById(R.id.calendarLayout);
         mCalendarView.setOnCalendarSelectListener(this);
         mCalendarView.setOnYearChangeListener(this);
-        mTextYear.setText(String.valueOf(mCalendarView.getCurYear()));
         mYear = mCalendarView.getCurYear();
-        mTextMonthDay.setText(mCalendarView.getCurMonth() + "月" + mCalendarView.getCurDay() + "日");
-        mTextLunar.setText("今日");
-        mTextCurrentDay.setText(String.valueOf(mCalendarView.getCurDay()));
+        mTextMonthDay.setText(String.format("%d月%d日", mCalendarView.getCurMonth(), mCalendarView.getCurDay()));
     }
 
     protected void initData() {
@@ -130,7 +113,6 @@ public class CalendarActivity extends BaseActivity implements
                 getSchemeCalendar(year, month, 27, 0xFF13acf0, "多"));
         //此方法在巨大的数据量上不影响遍历性能，推荐使用
         mCalendarView.setSchemeDate(map);
-
     }
 
     private Calendar getSchemeCalendar(int year, int month, int day, int color, String text) {
@@ -154,11 +136,7 @@ public class CalendarActivity extends BaseActivity implements
     @SuppressLint("SetTextI18n")
     @Override
     public void onCalendarSelect(Calendar calendar, boolean isClick) {
-        mTextLunar.setVisibility(View.VISIBLE);
-        mTextYear.setVisibility(View.VISIBLE);
         mTextMonthDay.setText(calendar.getMonth() + "月" + calendar.getDay() + "日");
-        mTextYear.setText(String.valueOf(calendar.getYear()));
-        mTextLunar.setText(calendar.getLunar());
         mYear = calendar.getYear();
     }
 

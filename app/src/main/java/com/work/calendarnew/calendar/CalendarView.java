@@ -12,8 +12,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
+import com.haibin.calendarview.Calendar;
 import com.work.R;
-import com.work.calendar.local.calendarview.Calendar;
 
 import java.io.Serializable;
 import java.util.ArrayList;

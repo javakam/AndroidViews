@@ -62,8 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_56"
         android:layout_marginBottom="@dimen/size_10"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="@dimen/size_50">
+        android:gravity="left|center_vertical">
 
         <!--年份选择-->
         <com.work.spinner.CommonSpinner

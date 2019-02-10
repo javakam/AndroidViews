@@ -6,8 +6,7 @@ import com.work.banner.BannerActivity;
 import com.work.basic.BasicViewActivity;
 import com.work.basic.BasicViewCenterActivity;
 import com.work.basic.animation.BasicViewAnimActivity;
-import com.work.calendar.local.CustomCalendarActivity;
-import com.work.calendar.remote.CalendarActivity;
+import com.work.calendar.CalendarActivity;
 import com.work.calendarnew.CalendarMonthActivity;
 import com.work.floatbutton.FloatButtonActivity;
 import com.work.progressbar.ProgressBarActivity;
@@ -43,10 +42,9 @@ public enum UIRouter {
     SPINNER(9, "下拉框", R.drawable.ic_launcher_background, SpinnerActivity.class),
     FLOAT_BUTTON(10, "全局悬浮窗", R.drawable.ic_launcher_background, FloatButtonActivity.class),
     Calendar1(11, "日历", R.drawable.ic_launcher_background, CalendarActivity.class),
-    Calendar2(12, "日历-自定义", R.drawable.ic_launcher_background, CustomCalendarActivity.class),
-    Calendar3(13, "日历-Recycler", R.drawable.ic_launcher_background, CalendarMonthActivity.class),
-    BANNER(14, "广告轮播", R.drawable.ic_launcher_background, BannerActivity.class),
-    STICKY_EXPAND_RV(15, "Sticky & Expand Rv", R.drawable.ic_launcher_background, RecyclerGroupExpandActivity.class);
+    Calendar3(12, "日历(RV)", R.drawable.ic_launcher_background, CalendarMonthActivity.class),
+    BANNER(13, "轮播图", R.drawable.ic_launcher_background, BannerActivity.class),
+    STICKY_EXPAND_RV(14, "Sticky & Expand Rv", R.drawable.ic_launcher_background, RecyclerGroupExpandActivity.class);
 
     public static Class<?> findClassById(int id) {
         for (UIRouter r : UIRouter.values()) {
