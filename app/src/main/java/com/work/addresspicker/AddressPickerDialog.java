@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 import com.work.R;
 import com.work.addresspicker.bean.AddressBean;
+import com.work.addresspicker.bean.ServerEntity;
 import com.work.addresspicker.dao.AddressDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**

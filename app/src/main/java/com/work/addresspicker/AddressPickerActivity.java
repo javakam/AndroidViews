@@ -8,8 +8,10 @@ import android.widget.Toast;
 
 import com.work.R;
 import com.work.addresspicker.bean.AddressBean;
+import com.work.addresspicker.bean.ServerEntity;
 import com.work.base.BaseActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +32,12 @@ public class AddressPickerActivity extends BaseActivity {
 
     public void lightPhone(View v) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        new AddressPickerDialog.Builder(this)
+
+        //第一步，从后台获取24省
+        List<ServerEntity> provinces = new ArrayList<>();
+
+
+        AddressPickerDialog dialog = new AddressPickerDialog.Builder(this)
                 .setConfig(AddressPickerDialog.getConfigOfPhoneLight())
                 .setThemeResId(R.style.AddressPickerDialogPhoneStyle)
                 .setOnConfirmClickListener(new AddressPickerDialog.OnConfirmClickListener() {
@@ -38,7 +45,8 @@ public class AddressPickerActivity extends BaseActivity {
                     public void confirm(List<AddressBean> pickedAddresses) {
                         Toast.makeText(AddressPickerActivity.this, pickedAddresses.size() + " ", Toast.LENGTH_LONG).show();
                     }
-                }).build().show();
+                }).build();
+        dialog.show();
     }
 
     public void lightPad(View v) {
